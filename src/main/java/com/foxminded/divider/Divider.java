@@ -1,5 +1,7 @@
 package com.foxminded.divider;
 
+import java.util.ArrayList;
+
 import javax.print.attribute.standard.Finishings;
 
 public class Divider {
@@ -22,16 +24,30 @@ public class Divider {
 		}
 
 		// —формировали массив чисел, определили первое число дл€ делител€.
-		for (int i : numbersOfDividend) {
-			System.out.println(i + " contains numbers Of Dividend");
+		Divider fD = new Divider();
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		for (int i = 0; i < numbersOfDividend.length-1; i++) {
+			int od = fD.findingDivider(numbersOfDividend[i], Integer.parseInt(divider));
+			result.add(od); //Ќо это не точно
+			int tmp = Integer.parseInt(divider) * od;
+			int ost = numbersOfDividend[0] - tmp;
+			StringBuilder sb = new StringBuilder();
+			sb.append(ost);
+			sb.append(numbersOfDividend[i+1]);
+			System.out.println(sb.toString());
+			numbersOfDividend[i+1]= Integer.parseInt(sb.toString());
+			System.out.println(numbersOfDividend[i+1]+"cells");
+		}
+		for(int i : result) {
+			System.out.println(i + "result");
 		}
 		//дл€ проверки
-		System.out.println(new Divider().findingDivider(numbersOfDividend[0], Integer.parseInt(divider)) + " result");
+		//System.out.println(new Divider().findingDivider(numbersOfDividend[0], Integer.parseInt(divider)) + " result");
 		//
 		int one = Integer.parseInt(dividend);
 		int two = Integer.parseInt(divider);
-		int result = one / two;
-		System.out.println(result);
+		//int result = one / two;
+		//System.out.println(result);
 	}
 
 	private Integer findingDivider(int dividend, int divider) {
