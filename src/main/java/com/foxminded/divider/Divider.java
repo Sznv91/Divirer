@@ -26,28 +26,31 @@ public class Divider {
 		// —формировали массив чисел, определили первое число дл€ делител€.
 		Divider fD = new Divider();
 		ArrayList<Integer> result = new ArrayList<Integer>();
-		for (int i = 0; i < numbersOfDividend.length-1; i++) {
+		for (int i = 0; i < numbersOfDividend.length; i++) {
 			int od = fD.findingDivider(numbersOfDividend[i], Integer.parseInt(divider));
-			result.add(od); //Ќо это не точно
+			result.add(od); // Ќо это не точно
 			int tmp = Integer.parseInt(divider) * od;
 			int ost = numbersOfDividend[0] - tmp;
 			StringBuilder sb = new StringBuilder();
 			sb.append(ost);
-			sb.append(numbersOfDividend[i+1]);
 			System.out.println(sb.toString());
-			numbersOfDividend[i+1]= Integer.parseInt(sb.toString());
-			System.out.println(numbersOfDividend[i+1]+"cells");
+			if (i < numbersOfDividend.length - 1) {
+				sb.append(numbersOfDividend[i + 1]);
+				numbersOfDividend[i + 1] = Integer.parseInt(sb.toString());
+				System.out.println(numbersOfDividend[i + 1] + "cells");
+			}
 		}
-		for(int i : result) {
+		for (int i : result) {
 			System.out.println(i + "result");
 		}
-		//дл€ проверки
-		//System.out.println(new Divider().findingDivider(numbersOfDividend[0], Integer.parseInt(divider)) + " result");
+		// дл€ проверки
+		// System.out.println(new Divider().findingDivider(numbersOfDividend[0],
+		// Integer.parseInt(divider)) + " result");
 		//
 		int one = Integer.parseInt(dividend);
 		int two = Integer.parseInt(divider);
-		//int result = one / two;
-		//System.out.println(result);
+		// int result = one / two;
+		// System.out.println(result);
 	}
 
 	private Integer findingDivider(int dividend, int divider) {
