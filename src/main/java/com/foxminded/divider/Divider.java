@@ -30,7 +30,7 @@ public class Divider {
 			int od = fD.findingDivider(numbersOfDividend[i], Integer.parseInt(divider));
 			result.add(od); // Но это не точно
 			int tmp = Integer.parseInt(divider) * od;
-			int ost = numbersOfDividend[0] - tmp;
+			int ost = numbersOfDividend[i] - tmp;
 			StringBuilder sb = new StringBuilder();
 			sb.append(ost);
 			System.out.println(sb.toString());
