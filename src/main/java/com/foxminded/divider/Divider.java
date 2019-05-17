@@ -93,7 +93,7 @@ public class Divider {
 		int positionInAnswer = 0;
 		
 		while (true) {
-			if (positionInDivident != String.valueOf(dividend).length()) {
+			if (positionInDivident != dividendMassive.length) {
 				if (positionInDivident < 1) {
 					lastResult = dividendMassive[positionInDivident] - (divider * answer.get(positionInAnswer));
 					positionInDivident++;
@@ -104,8 +104,16 @@ public class Divider {
 					collector.append(dividendMassive[positionInDivident]);
 					int curentDiv = Integer.parseInt(collector.toString());
 					lastResult = curentDiv - (divider * answer.get(positionInAnswer));
+					for(int i = 0; i < positionInDivident; i++) {
+						collector.insert(0, " ");
+					}
 					System.out.println(collector.toString());
-					System.out.println(divider * answer.get(positionInAnswer));
+					StringBuilder secondNumber = new StringBuilder();
+					for(int i = 0; i < positionInDivident; i ++) {
+						secondNumber.insert(0, " ");
+					}
+					secondNumber.append(divider * answer.get(positionInAnswer));
+					System.out.println(secondNumber);
 					positionInDivident++;
 					positionInAnswer++;
 				}
