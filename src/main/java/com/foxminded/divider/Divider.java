@@ -4,23 +4,14 @@ import java.util.ArrayList;
 
 public class Divider {
 
-	public static void divide(String dividend, String divider) {
-		Divider dividerInstance = new Divider();
-		int[] numbersOfDividend = dividerInstance.makeNumMassive(dividend, divider);
+	private static Divider dividerInstance = new Divider();
 
-		ArrayList<Integer> result = new ArrayList<Integer>();
-		for (int i = 0; i < numbersOfDividend.length; i++) {
-			int partOfResult = dividerInstance.findingDivider(numbersOfDividend[i], Integer.parseInt(divider));
-			result.add(partOfResult);
-			int tmp = Integer.parseInt(divider) * partOfResult;
-			int remainder = numbersOfDividend[i] - tmp;
-			StringBuilder sb = new StringBuilder();
-			sb.append(remainder);
-			if (i < numbersOfDividend.length - 1) {
-				sb.append(numbersOfDividend[i + 1]);
-				numbersOfDividend[i + 1] = Integer.parseInt(sb.toString());
-			}
-		}
+	public static void divide(String dividend, String divider) {
+		final int[] numbersOfDividend = dividerInstance.makeNumMassive(dividend, divider);
+		ArrayList<Integer> result = dividerInstance.getResult(numbersOfDividend, divider);
+		
+		//trouble here
+		
 		dividerInstance.draw(numbersOfDividend, Integer.parseInt(dividend), Integer.parseInt(divider), result);
 	}
 
@@ -54,6 +45,24 @@ public class Divider {
 		return numbersOfDividend;
 	}
 
+	private ArrayList<Integer> getResult(int[] numbersOfDividendTest, String divider) {
+		int[] numbersOfDividendTTest = numbersOfDividendTest;
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		for (int i = 0; i < numbersOfDividendTTest.length; i++) {
+			int partOfResult = dividerInstance.findingDivider(numbersOfDividendTTest[i], Integer.parseInt(divider));
+			result.add(partOfResult);
+			int tmp = Integer.parseInt(divider) * partOfResult;
+			int remainder = numbersOfDividendTTest[i] - tmp;
+			StringBuilder sb = new StringBuilder();
+			sb.append(remainder);
+			if (i < numbersOfDividendTTest.length - 1) {
+				sb.append(numbersOfDividendTTest[i + 1]);
+				numbersOfDividendTTest[i + 1] = Integer.parseInt(sb.toString());
+			}
+		}
+		return result;
+	}
+
 	private void draw(int[] dividendMassive, int dividend, int divider, ArrayList<Integer> answer) {
 		StringBuilder fisrString = new StringBuilder("_");
 		fisrString.append(dividend + "|" + divider);
@@ -83,6 +92,7 @@ public class Divider {
 		int lastResult = 0;
 		int positionInDivident = 0;
 		int positionInAnswer = 0;
+		
 		while (true) {
 			if (positionInDivident != String.valueOf(dividend).length()) {
 				if (positionInDivident < 1) {
@@ -96,7 +106,7 @@ public class Divider {
 					int curentDiv = Integer.parseInt(collector.toString());
 					lastResult = curentDiv - (divider * answer.get(positionInAnswer));
 					System.out.println(collector.toString());
-					System.out.println(divider* answer.get(positionInAnswer));
+					System.out.println(divider * answer.get(positionInAnswer));
 					positionInDivident++;
 					positionInAnswer++;
 				}
