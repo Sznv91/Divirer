@@ -2,48 +2,26 @@ package com.foxminded.divider;
 
 import java.util.ArrayList;
 
-import javax.print.attribute.standard.Finishings;
-
 public class Divider {
 
 	public static void divide(String dividend, String divider) {
-		StringBuilder firstNumber = new StringBuilder(dividend.substring(0, divider.length()));
-		if (Integer.parseInt(firstNumber.toString()) < Integer.parseInt(divider)) {
-			firstNumber.append(dividend.substring(divider.length(), divider.length() + 1));
-		}
-		int[] numbersOfDividend = new int[dividend.length() - firstNumber.length() + 1];
-		numbersOfDividend[0] = Integer.parseInt(firstNumber.toString());
-		String otherNumberInMassive = dividend.substring(firstNumber.length());
-		int positionNumberInMassive = 1;
-		int positionInRemainder = 0;
-		while (positionNumberInMassive < numbersOfDividend.length) {
-			numbersOfDividend[positionNumberInMassive] = Integer
-					.parseInt(otherNumberInMassive.substring(positionInRemainder, positionInRemainder + 1));
-			positionNumberInMassive++;
-			positionInRemainder++;
-		}
-
-		// Сформировали массив чисел, определили первое число для делителя.
 		Divider dividerInstance = new Divider();
+		int[] numbersOfDividend = dividerInstance.makeNumMassive(dividend, divider);
+
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		for (int i = 0; i < numbersOfDividend.length; i++) {
-			int partOfResult = dividerInstance.
-					findingDivider(numbersOfDividend[i], Integer.parseInt(divider));
-			result.add(partOfResult); 
+			int partOfResult = dividerInstance.findingDivider(numbersOfDividend[i], Integer.parseInt(divider));
+			result.add(partOfResult);
 			int tmp = Integer.parseInt(divider) * partOfResult;
 			int remainder = numbersOfDividend[i] - tmp;
 			StringBuilder sb = new StringBuilder();
 			sb.append(remainder);
-			System.out.println(sb.toString());
 			if (i < numbersOfDividend.length - 1) {
 				sb.append(numbersOfDividend[i + 1]);
 				numbersOfDividend[i + 1] = Integer.parseInt(sb.toString());
-				System.out.println(numbersOfDividend[i + 1] + "cells");
 			}
 		}
-		for (int i : result) {
-			System.out.println(i + "result");
-		}
+		dividerInstance.draw(numbersOfDividend, Integer.parseInt(dividend), Integer.parseInt(divider), result);
 	}
 
 	private Integer findingDivider(int dividend, int divider) {
@@ -53,6 +31,77 @@ public class Divider {
 				return result;
 			} else {
 				result--;
+			}
+		}
+	}
+
+	private int[] makeNumMassive(String dividend, String divider) {
+		StringBuilder incompletePrivate = new StringBuilder(dividend.substring(0, divider.length()));
+		if (Integer.parseInt(incompletePrivate.toString()) < Integer.parseInt(divider)) {
+			incompletePrivate.append(dividend.substring(divider.length(), divider.length() + 1));
+		}
+		int[] numbersOfDividend = new int[dividend.length() - incompletePrivate.length() + 1];
+		numbersOfDividend[0] = Integer.parseInt(incompletePrivate.toString());
+		String otherNumberInMassive = dividend.substring(incompletePrivate.length());
+		int positionNumberInMassive = 1;
+		int positionInRemainder = 0;
+		while (positionNumberInMassive < numbersOfDividend.length) {
+			numbersOfDividend[positionNumberInMassive] = Integer
+					.parseInt(otherNumberInMassive.substring(positionInRemainder, positionInRemainder + 1));
+			positionNumberInMassive++;
+			positionInRemainder++;
+		}
+		return numbersOfDividend;
+	}
+
+	private void draw(int[] dividendMassive, int dividend, int divider, ArrayList<Integer> answer) {
+		StringBuilder fisrString = new StringBuilder("_");
+		fisrString.append(dividend + "|" + divider);
+
+		System.out.println(fisrString.toString());
+		StringBuilder secondString = new StringBuilder();
+		secondString.append(" " + divider * answer.get(0));
+		for (int i = 0; i < String.valueOf(dividend).length() - 1; i++) {
+			secondString.append(" ");
+		}
+		secondString.append("|");
+		for (int i = 0; i < answer.size(); i++) {
+			secondString.append("-");
+		}
+		System.out.println(secondString.toString());
+		StringBuilder thirdString = new StringBuilder();
+		thirdString.append(" -");
+		for (int i = 0; i < String.valueOf(dividend).length() - 1; i++) {
+			thirdString.append(" ");
+		}
+		thirdString.append("|");
+		for (int i : answer) {
+			thirdString.append(i);
+		}
+		System.out.println(thirdString.toString());
+
+		int lastResult = 0;
+		int positionInDivident = 0;
+		int positionInAnswer = 0;
+		while (true) {
+			if (positionInDivident != String.valueOf(dividend).length()) {
+				if (positionInDivident < 1) {
+					lastResult = dividendMassive[positionInDivident] - (divider * answer.get(positionInAnswer));
+					positionInDivident++;
+					positionInAnswer++;
+				} else {
+					StringBuilder collector = new StringBuilder();
+					collector.append(lastResult);
+					collector.append(dividendMassive[positionInDivident]);
+					int curentDiv = Integer.parseInt(collector.toString());
+					lastResult = curentDiv - (divider * answer.get(positionInAnswer));
+					System.out.println(collector.toString());
+					System.out.println(divider* answer.get(positionInAnswer));
+					positionInDivident++;
+					positionInAnswer++;
+				}
+			} else {
+				break;
 			}
 		}
 	}
