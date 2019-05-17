@@ -7,12 +7,10 @@ public class Divider {
 	private static Divider dividerInstance = new Divider();
 
 	public static void divide(String dividend, String divider) {
-		final int[] numbersOfDividend = dividerInstance.makeNumMassive(dividend, divider);
+		int[] numbersOfDividend = dividerInstance.makeNumMassive(dividend, divider);
+		int[] toDraw = dividerInstance.makeNumMassive(dividend, divider);
 		ArrayList<Integer> result = dividerInstance.getResult(numbersOfDividend, divider);
-		
-		//trouble here
-		
-		dividerInstance.draw(numbersOfDividend, Integer.parseInt(dividend), Integer.parseInt(divider), result);
+		dividerInstance.draw(toDraw, Integer.parseInt(dividend), Integer.parseInt(divider), result);
 	}
 
 	private Integer findingDivider(int dividend, int divider) {
@@ -49,7 +47,8 @@ public class Divider {
 		int[] numbersOfDividendTTest = numbersOfDividendTest;
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		for (int i = 0; i < numbersOfDividendTTest.length; i++) {
-			int partOfResult = dividerInstance.findingDivider(numbersOfDividendTTest[i], Integer.parseInt(divider));
+			int partOfResult = dividerInstance.
+					findingDivider(numbersOfDividendTTest[i], Integer.parseInt(divider));
 			result.add(partOfResult);
 			int tmp = Integer.parseInt(divider) * partOfResult;
 			int remainder = numbersOfDividendTTest[i] - tmp;
