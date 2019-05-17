@@ -69,7 +69,7 @@ public class Divider {
 		System.out.println(fisrString.toString());
 		StringBuilder secondString = new StringBuilder();
 		secondString.append(" " + divider * answer.get(0));
-		for (int i = 0; i < String.valueOf(dividend).length() - 1; i++) {
+		for (int i = 0; i < dividendMassive.length - 1; i++) {
 			secondString.append(" ");
 		}
 		secondString.append("|");
@@ -78,9 +78,14 @@ public class Divider {
 		}
 		System.out.println(secondString.toString());
 		StringBuilder thirdString = new StringBuilder();
-		thirdString.append(" -");
-		for (int i = 0; i < String.valueOf(dividend).length() - 1; i++) {
+		thirdString.append(" ");
+		for (int i = 0; i < String.valueOf(dividend).length(); i++) {
+			if(i<String.valueOf(answer.get(0)*divider).length()) {
+				thirdString.append("-");
+			}
+			else {
 			thirdString.append(" ");
+			}
 		}
 		thirdString.append("|");
 		for (int i : answer) {
