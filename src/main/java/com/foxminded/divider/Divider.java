@@ -2,6 +2,8 @@ package com.foxminded.divider;
 
 import java.util.ArrayList;
 
+import javax.swing.text.DefaultEditorKit.CutAction;
+
 public class Divider {
 
 	private static Divider dividerInstance = new Divider();
@@ -47,8 +49,7 @@ public class Divider {
 		int[] numbersOfDividendTTest = numbersOfDividendTest;
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		for (int i = 0; i < numbersOfDividendTTest.length; i++) {
-			int partOfResult = dividerInstance.
-					findingDivider(numbersOfDividendTTest[i], Integer.parseInt(divider));
+			int partOfResult = dividerInstance.findingDivider(numbersOfDividendTTest[i], Integer.parseInt(divider));
 			result.add(partOfResult);
 			int tmp = Integer.parseInt(divider) * partOfResult;
 			int remainder = numbersOfDividendTTest[i] - tmp;
@@ -80,11 +81,10 @@ public class Divider {
 		StringBuilder thirdString = new StringBuilder();
 		thirdString.append(" ");
 		for (int i = 0; i < String.valueOf(dividend).length(); i++) {
-			if(i<String.valueOf(answer.get(0)*divider).length()) {
+			if (i < String.valueOf(answer.get(0) * divider).length()) {
 				thirdString.append("-");
-			}
-			else {
-			thirdString.append(" ");
+			} else {
+				thirdString.append(" ");
 			}
 		}
 		thirdString.append("|");
@@ -93,38 +93,48 @@ public class Divider {
 		}
 		System.out.println(thirdString.toString());
 
-		int lastResult = 0;
-		int positionInDivident = 0;
-		int positionInAnswer = 0;
-		
-		while (true) {
-			if (positionInDivident != dividendMassive.length) {
-				if (positionInDivident < 1) {
-					lastResult = dividendMassive[positionInDivident] - (divider * answer.get(positionInAnswer));
-					positionInDivident++;
-					positionInAnswer++;
-				} else {
-					StringBuilder collector = new StringBuilder();
-					collector.append(lastResult);
-					collector.append(dividendMassive[positionInDivident]);
-					int curentDiv = Integer.parseInt(collector.toString());
-					lastResult = curentDiv - (divider * answer.get(positionInAnswer));
-					for(int i = 0; i < positionInDivident; i++) {
-						collector.insert(0, " ");
-					}
-					System.out.println(collector.toString());
-					StringBuilder secondNumber = new StringBuilder();
-					for(int i = 0; i < positionInDivident; i ++) {
-						secondNumber.insert(0, " ");
-					}
-					secondNumber.append(divider * answer.get(positionInAnswer));
-					System.out.println(secondNumber);
-					positionInDivident++;
-					positionInAnswer++;
+		int counterOtstup = 1;
+		int massiveCounter = 0;
+		int lastResult = dividendMassive[0];
+		int answerCounter = 0;
+		while (massiveCounter < dividendMassive.length - 1) {
+			int lasLen = String.valueOf(lastResult).length();
+			int umnoj = divider * answer.get(answerCounter);
+			StringBuilder sb = new StringBuilder();
+			sb.append(lastResult - umnoj);
+			int sbLen = sb.length();
+			sb.append(dividendMassive[massiveCounter + 1]);
+			lastResult = Integer.parseInt(sb.toString());
+			if (lasLen - sbLen < 2 && lasLen <= 2) {
+				for(int i = 0; i < counterOtstup; i++) {
+					sb.insert(0, " ");
 				}
-			} else {
-				break;
 			}
+			else {
+				for (int i = 0; i < lasLen - sbLen + counterOtstup; i++) {
+					sb.insert(0, " ");
+				}
+			}
+			
+			System.out.println(sb.toString());
+
+			StringBuilder twoNumber = new StringBuilder();
+			twoNumber.append("" + (answer.get(answerCounter + 1) * divider));
+			
+			if (lasLen - sbLen < 2 && lasLen <= 2) {
+				for(int i = 0; i < counterOtstup; i++) {
+					twoNumber.insert(0, " ");
+				}
+			}
+			else {
+				for (int i = 0; i < lasLen - sbLen + counterOtstup; i++) {
+					twoNumber.insert(0, " ");
+				}
+			}
+			System.out.println(twoNumber);
+			massiveCounter++;
+			answerCounter++;
+			counterOtstup++;
 		}
 	}
 }
