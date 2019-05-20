@@ -13,8 +13,7 @@ public class Main {
 		System.out.println("Please entry divider");
 		String divider = reader.readLine();
 		reader.close();
-		Divider.divide(dividend, divider);
-		
+		Drawer.draw(dividend, divider);		
 	}
 
 }
