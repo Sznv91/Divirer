@@ -13,11 +13,13 @@ public class Drawer {
 		this.dividend = Integer.parseInt(dividend);
 		this.divider = Integer.parseInt(divider);
 		this.answer = dividerInstanse.divide(dividend, divider);
-		this.dividendMassive = dividerInstanse.getMassiveDividend();
+		this.dividendMassive = dividerInstanse.makeNumMassive(dividend, divider);
 		
 		drawFistString();
 		drawSecondString();
 		drawThirdString();
+		drawOtherString();
+		
 	}
 
 	private void drawFistString() {
@@ -56,7 +58,7 @@ public class Drawer {
 		System.out.println(thirdString.toString());
 	}
 
-	private void drawOtherString(int[] dividendMassive, int dividend, int divider, ArrayList<Integer> answer) {
+	private void drawOtherString() {
 		int counterOtstup = 1;
 		int massiveCounter = 0;
 		int lastResult = dividendMassive[0];

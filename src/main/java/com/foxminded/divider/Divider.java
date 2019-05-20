@@ -24,7 +24,7 @@ public class Divider {
 		}
 	}
 
-	private int[] makeNumMassive(String dividend, String divider) {
+	protected int[] makeNumMassive(String dividend, String divider) {
 		StringBuilder incompletePrivate = new StringBuilder(dividend.substring(0, divider.length()));
 		if (Integer.parseInt(incompletePrivate.toString()) < Integer.parseInt(divider)) {
 			incompletePrivate.append(dividend.substring(divider.length(), divider.length() + 1));
@@ -59,9 +59,5 @@ public class Divider {
 			}
 		}
 		return result;
-	}
-
-	public int[] getMassiveDividend() {
-		return this.numbersOfDividend;
 	}
 }
