@@ -4,35 +4,20 @@ import java.util.ArrayList;
 
 public class Drawer {
 
-	private static String dividend, divider;
+	private static int dividend, divider;
 	private static ArrayList<Integer> answer;
+	private static int [] dividendMassive;
 
 	public void draw(String dividend, String divider) {
-		this.dividend = dividend;
-		this.divider = divider;
-
 		Divider dividerInstanse = new Divider();
+		this.dividend = Integer.parseInt(dividend);
+		this.divider = Integer.parseInt(divider);
 		this.answer = dividerInstanse.divide(dividend, divider);
-
-	}
-
-	private int[] makeNumMassive(String dividend, String divider) {
-		StringBuilder incompletePrivate = new StringBuilder(dividend.substring(0, divider.length()));
-		if (Integer.parseInt(incompletePrivate.toString()) < Integer.parseInt(divider)) {
-			incompletePrivate.append(dividend.substring(divider.length(), divider.length() + 1));
-		}
-		int[] numbersOfDividend = new int[dividend.length() - incompletePrivate.length() + 1];
-		numbersOfDividend[0] = Integer.parseInt(incompletePrivate.toString());
-		String otherNumberInMassive = dividend.substring(incompletePrivate.length());
-		int positionNumberInMassive = 1;
-		int positionInRemainder = 0;
-		while (positionNumberInMassive < numbersOfDividend.length) {
-			numbersOfDividend[positionNumberInMassive] = Integer
-					.parseInt(otherNumberInMassive.substring(positionInRemainder, positionInRemainder + 1));
-			positionNumberInMassive++;
-			positionInRemainder++;
-		}
-		return numbersOfDividend;
+		this.dividendMassive = dividerInstanse.getMassiveDividend();
+		
+		drawFistString();
+		drawSecondString();
+		drawThirdString();
 	}
 
 	private void drawFistString() {

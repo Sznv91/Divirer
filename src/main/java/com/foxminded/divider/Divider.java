@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Divider {
 
+	private static int[] numbersOfDividend;
 	private static Divider dividerInstance = new Divider();
 
-	public static ArrayList<Integer> divide(String dividend, String divider) {
-		int[] numbersOfDividend = dividerInstance.makeNumMassive(dividend, divider);
-		int[] toDraw = dividerInstance.makeNumMassive(dividend, divider);
-		ArrayList<Integer> result = dividerInstance.getResult(numbersOfDividend, divider);
+	public ArrayList<Integer> divide(String dividend, String divider) {
+		this.numbersOfDividend = dividerInstance.makeNumMassive(dividend, divider);
+		ArrayList<Integer> result = dividerInstance.calcResult(numbersOfDividend, divider);
 		return result;
 	}
 
@@ -43,7 +43,7 @@ public class Divider {
 		return numbersOfDividend;
 	}
 
-	private ArrayList<Integer> getResult(int[] numbersOfDividendTest, String divider) {
+	private ArrayList<Integer> calcResult(int[] numbersOfDividendTest, String divider) {
 		int[] numbersOfDividendTTest = numbersOfDividendTest;
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		for (int i = 0; i < numbersOfDividendTTest.length; i++) {
@@ -59,5 +59,9 @@ public class Divider {
 			}
 		}
 		return result;
+	}
+
+	public int[] getMassiveDividend() {
+		return this.numbersOfDividend;
 	}
 }
