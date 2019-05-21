@@ -81,6 +81,9 @@ public class Drawer {
 			//here mast was be Bottom String
 			StringBuilder bottomString = new StringBuilder();
 			bottomString.append(divider*answer.get(position));
+			if (Integer.parseInt(bottomString.toString()) == 0){
+				indent++;
+			}
 			int indentBottomString = howManyNumbers(Integer.parseInt(bottomString.toString()));
 			while (bottomString.length() < topString.length()) {
 				bottomString.insert(0, " ");
