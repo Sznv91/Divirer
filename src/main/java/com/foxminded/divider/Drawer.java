@@ -59,47 +59,35 @@ public class Drawer {
 	}
 
 	private void drawOtherString() {
-		int counterOtstup = 1;
-		int massiveCounter = 0;
-		int lastResult = dividendMassive[0];
-		int answerCounter = 0;
-		while (massiveCounter < dividendMassive.length - 1) {
-			int lasLen = String.valueOf(lastResult).length();
-			int umnoj = divider * answer.get(answerCounter);
-			StringBuilder sb = new StringBuilder();
-			sb.append(lastResult - umnoj);
-			int sbLen = sb.length();
-			sb.append(dividendMassive[massiveCounter + 1]);
-			lastResult = Integer.parseInt(sb.toString());
-			if (lasLen - sbLen < 2 && lasLen <= 1) {
-				for (int i = 0; i < counterOtstup; i++) {
-					sb.insert(0, " ");
-				}
-			} else {
-				for (int i = 0; i < lasLen - sbLen + counterOtstup; i++) {
-					sb.insert(0, " ");
-				}
+		int indent = 1; // Общий отступ
+		int lastTopString = dividendMassive[0];
+		for(int position = 1; position < dividendMassive.length; position++) {
+			StringBuilder topString = new StringBuilder();
+			topString.append(lastTopString - (divider*answer.get(position-1)));
+			indent += howManyNumbers(lastTopString) - howManyNumbers((divider*answer.get(position+1)));
+			// 379-369=9
+			// 378 = 3 symbols
+			// 9 = 1 symbol
+			// 3-1 = 2 symbols indent
+			topString.append(dividendMassive[position]);
+			lastTopString = Integer.parseInt(topString.toString());
+			
+			for (int j = 0; j <= indent+1; j++) {
+				topString.insert(0, " ");
 			}
-
-			System.out.println(sb.toString());
-
-			StringBuilder twoNumber = new StringBuilder();
-			twoNumber.append("" + (answer.get(answerCounter + 1) * divider));
-
-			if (lasLen - sbLen < 2 && lasLen <= 1) {
-				for (int i = 0; i < counterOtstup; i++) {
-					twoNumber.insert(0, " ");
-				}
-			} else {
-				for (int i = 0; i < lasLen - sbLen + counterOtstup; i++) {
-					twoNumber.insert(0, " ");
-				}
-			}
-			System.out.println(twoNumber);
-			massiveCounter++;
-			answerCounter++;
-			counterOtstup++;
+			
+			
+			System.out.println(topString);
+			
 		}
+	}
+	private int howManyNumbers (int num) {
+		int counter = 0;
+		while (num > 0) {
+			num = num/10;
+			counter++;
+		}
+		return counter;
 	}
 
 }
