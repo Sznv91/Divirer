@@ -64,7 +64,7 @@ public class Drawer {
 		for(int position = 1; position < dividendMassive.length; position++) {
 			StringBuilder topString = new StringBuilder();
 			topString.append(lastTopString - (divider*answer.get(position-1)));
-			indent += howManyNumbers(lastTopString) - howManyNumbers((divider*answer.get(position+1)));
+			indent += howManyNumbers(lastTopString) - howManyNumbers(lastTopString - (divider*answer.get(position-1)));
 			// 379-369=9
 			// 378 = 3 symbols
 			// 9 = 1 symbol
@@ -72,13 +72,24 @@ public class Drawer {
 			topString.append(dividendMassive[position]);
 			lastTopString = Integer.parseInt(topString.toString());
 			
-			for (int j = 0; j <= indent+1; j++) {
+			for (int j = 0; j < indent; j++) { //SetUp indent = 1, or use <=
 				topString.insert(0, " ");
 			}
 			
-			
 			System.out.println(topString);
 			
+			//here mast was be Bottom String
+			StringBuilder bottomString = new StringBuilder();
+			bottomString.append(divider*answer.get(position));
+			int indentBottomString = howManyNumbers(Integer.parseInt(bottomString.toString()));
+			while (bottomString.length() < topString.length()) {
+				bottomString.insert(0, " ");
+			}
+			
+			System.out.println(bottomString.toString());
+			
+			// here mast was be --- under "bottom String"
+			//	//	//	//	//	//	//	//	
 		}
 	}
 	private int howManyNumbers (int num) {
