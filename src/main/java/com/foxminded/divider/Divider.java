@@ -4,12 +4,9 @@ import java.util.ArrayList;
 
 public class Divider {
 
-	private static int[] numbersOfDividend;
-	private static Divider dividerInstance = new Divider();
-
 	public ArrayList<Integer> divide(String dividend, String divider) {
-		this.numbersOfDividend = dividerInstance.makeNumMassive(dividend, divider);
-		ArrayList<Integer> result = dividerInstance.calcResult(numbersOfDividend, divider);
+		int[] numbersOfDividend = makeNumMassive(dividend, divider);
+		ArrayList<Integer> result = calcResult(numbersOfDividend, divider);
 		return result;
 	}
 
@@ -31,31 +28,30 @@ public class Divider {
 		}
 		int[] numbersOfDividend = new int[dividend.length() - incompletePrivate.length() + 1];
 		numbersOfDividend[0] = Integer.parseInt(incompletePrivate.toString());
-		String otherNumberInMassive = dividend.substring(incompletePrivate.length());
+		String otherNumber = dividend.substring(incompletePrivate.length());
 		int positionNumberInMassive = 1;
-		int positionInRemainder = 0;
+		int positionInOtherNumber = 0;
 		while (positionNumberInMassive < numbersOfDividend.length) {
 			numbersOfDividend[positionNumberInMassive] = Integer
-					.parseInt(otherNumberInMassive.substring(positionInRemainder, positionInRemainder + 1));
+					.parseInt(otherNumber.substring(positionInOtherNumber, positionInOtherNumber + 1));
 			positionNumberInMassive++;
-			positionInRemainder++;
+			positionInOtherNumber++;
 		}
 		return numbersOfDividend;
 	}
 
-	private ArrayList<Integer> calcResult(int[] numbersOfDividendTest, String divider) {
-		int[] numbersOfDividendTTest = numbersOfDividendTest;
+	private ArrayList<Integer> calcResult(int[] numbersOfDividend, String divider) {
 		ArrayList<Integer> result = new ArrayList<Integer>();
-		for (int i = 0; i < numbersOfDividendTTest.length; i++) {
-			int partOfResult = dividerInstance.findingDivider(numbersOfDividendTTest[i], Integer.parseInt(divider));
+		for (int i = 0; i < numbersOfDividend.length; i++) {
+			int partOfResult = findingDivider(numbersOfDividend[i], Integer.parseInt(divider));
 			result.add(partOfResult);
 			int tmp = Integer.parseInt(divider) * partOfResult;
-			int remainder = numbersOfDividendTTest[i] - tmp;
+			int remainder = numbersOfDividend[i] - tmp;
 			StringBuilder sb = new StringBuilder();
 			sb.append(remainder);
-			if (i < numbersOfDividendTTest.length - 1) {
-				sb.append(numbersOfDividendTTest[i + 1]);
-				numbersOfDividendTTest[i + 1] = Integer.parseInt(sb.toString());
+			if (i < numbersOfDividend.length - 1) {
+				sb.append(numbersOfDividend[i + 1]);
+				numbersOfDividend[i + 1] = Integer.parseInt(sb.toString());
 			}
 		}
 		return result;
