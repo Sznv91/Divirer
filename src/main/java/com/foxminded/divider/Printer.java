@@ -2,7 +2,7 @@ package com.foxminded.divider;
 
 import java.util.ArrayList;
 
-public class Drawer {
+public class Printer {
 
 	private static int dividend, divider;
 	private static ArrayList<Integer> answer;
@@ -15,20 +15,20 @@ public class Drawer {
 		this.answer = dividerInstanse.divide(dividend, divider);
 		this.dividendMassive = dividerInstanse.makeNumMassive(dividend, divider);
 
-		drawFistString();
-		drawSecondString();
-		drawThirdString();
-		drawOtherString();
+		printFirstString();
+		printSecondString();
+		printThirdString();
+		printOtherString();
 
 	}
 
-	private void drawFistString() {
-		StringBuilder fisrString = new StringBuilder("_");
-		fisrString.append(dividend + "|" + divider);
-		System.out.println(fisrString.toString());
+	private void printFirstString() {
+		StringBuilder firstString = new StringBuilder("_");
+		firstString.append(dividend + "|" + divider);
+		System.out.println(firstString.toString());
 	}
 
-	private void drawSecondString() {
+	private void printSecondString() {
 		StringBuilder secondString = new StringBuilder();
 		secondString.append(" " + divider * answer.get(0));
 		for (int i = 0; i < dividendMassive.length - 1; i++) {
@@ -41,11 +41,11 @@ public class Drawer {
 		System.out.println(secondString.toString());
 	}
 
-	private void drawThirdString() {
+	private void printThirdString() {
 		StringBuilder thirdString = new StringBuilder();
 		thirdString.append(" ");
-		for (int i = 0; i < String.valueOf(dividend).length(); i++) {
-			if (i < String.valueOf(answer.get(0) * divider).length()) {
+		for (int i = 0; i < howManyDigit(dividend); i++) {
+			if (i < howManyDigit(answer.get(0) * divider)) {
 				thirdString.append("-");
 			} else {
 				thirdString.append(" ");
@@ -58,14 +58,13 @@ public class Drawer {
 		System.out.println(thirdString.toString());
 	}
 
-	private void drawOtherString() {
-		int indent = 1; // Общий отступ
+	private void printOtherString() {
+		int indent = 1; // setUp 1, because first string have "-"
 		int lastTopString = dividendMassive[0];
 		for (int position = 1; position < dividendMassive.length; position++) {
 			StringBuilder topString = new StringBuilder();
 			topString.append(lastTopString - (divider * answer.get(position - 1)));
-			indent += howManyNumbers(lastTopString)
-					- howManyNumbers(lastTopString - (divider * answer.get(position - 1)));
+			indent += howManyDigit(lastTopString) - howManyDigit(lastTopString - (divider * answer.get(position - 1)));
 			// 379-369=9
 			// 378 = 3 symbols
 			// 9 = 1 symbol
@@ -74,58 +73,48 @@ public class Drawer {
 			lastTopString = Integer.parseInt(topString.toString());
 			topString.insert(0, "_");
 
-			while (indent >= topString.length() - 1) { // SetUp indent = 1, or use <= //for (int j = 1; j < indent; j++)
+			while (indent >= topString.length() - 1) { // "-1" because print "-" in 75 String
 				topString.insert(0, " ");
-				// System.out.println(" yo ");
 			}
-
 			System.out.println(topString);
 
-			// here mast was be Bottom String
 			StringBuilder bottomString = new StringBuilder();
 			bottomString.append(divider * answer.get(position));
 			if (Integer.parseInt(bottomString.toString()) == 0) {
 				indent++;
 			}
-			int indentBottomString = howManyNumbers(Integer.parseInt(bottomString.toString()));
 			while (bottomString.length() < topString.length()) {
 				bottomString.insert(0, " ");
 			}
-
 			System.out.println(bottomString.toString());
-			
-			System.out.println(pasteLine(lastTopString,topString));
-			
+			System.out.println(getBottomLine(lastTopString, topString));
+
 		}
-		System.out.println(pasteLastString(lastTopString));
+		System.out.println(getLastString(lastTopString));
 	}
 
-	private String pasteLastString(int lastTopString) {
-		StringBuilder sb = new StringBuilder();
-		int bottomNumber = answer.get(answer.size()-1);
-		sb.append(lastTopString - bottomNumber);
-		while(sb.length() <= howManyNumbers(dividend)) {
-			sb.insert(0, " ");
+	private String getLastString(int lastTopString) {
+		StringBuilder lastString = new StringBuilder();
+		int bottomNumber = divider * answer.get(answer.size() - 1);
+		lastString.append(lastTopString - bottomNumber);
+		while (lastString.length() <= howManyDigit(dividend)) {
+			lastString.insert(0, " ");
 		}
-		
-		// TODO Auto-generated method stub
-		return sb.toString();
+		return lastString.toString();
 	}
 
-	private String pasteLine(int lastNumber, StringBuilder printedString) {
-		StringBuilder sb = new StringBuilder();
-		while(howManyNumbers(lastNumber) > sb.length()) {
-			sb.append("-");
+	private String getBottomLine(int lastNumber, StringBuilder printedString) {
+		StringBuilder bottomLine = new StringBuilder();
+		while (howManyDigit(lastNumber) > bottomLine.length()) {
+			bottomLine.append("-");
 		}
-		while(printedString.length() > sb.length()) {
-			sb.insert(0, " ");
+		while (printedString.length() > bottomLine.length()) {
+			bottomLine.insert(0, " ");
 		}
-		return sb.toString();
-		// TODO Auto-generated method stub
-		
+		return bottomLine.toString();
 	}
 
-	private int howManyNumbers(int num) {
+	private int howManyDigit(int num) {
 		int counter = 0;
 		if (num == 0) {
 			return 1;
