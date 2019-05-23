@@ -54,5 +54,3 @@ class DividerTest {
 		assertArrayEquals(expected, actual);
 	}
 }
-
-// givenEmptyText_whenReverseText_thenEmptyText()
