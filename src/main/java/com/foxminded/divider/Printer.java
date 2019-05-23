@@ -59,38 +59,36 @@ public class Printer {
 	}
 
 	private void printOtherString() {
-		int indent = 1; // setUp 1, because first string have "-"
-		int lastTopString = dividendMassive[0];
-		for (int position = 1; position < dividendMassive.length; position++) {
-			StringBuilder topString = new StringBuilder();
-			topString.append(lastTopString - (divider * answer.get(position - 1)));
-			indent += howManyDigit(lastTopString) - howManyDigit(lastTopString - (divider * answer.get(position - 1)));
-			// 379-369=9
-			// 378 = 3 symbols
-			// 9 = 1 symbol
-			// 3-1 = 2 symbols indent
-			topString.append(dividendMassive[position]);
-			lastTopString = Integer.parseInt(topString.toString());
-			topString.insert(0, "_");
+		int lastTopNumber = dividendMassive[0];
+		int lastBottomNumber = answer.get(0) * divider;
+		StringBuilder lastTopPrintedString = new StringBuilder();
+		lastTopPrintedString.append(lastTopNumber);
+		lastTopPrintedString.insert(0, "_");
 
-			while (indent >= topString.length() - 1) { // "-1" because print "-" in 75 String
+		for (int i = 1; i < dividendMassive.length; i++) {
+			StringBuilder topString = new StringBuilder();
+			topString.append(lastTopNumber - lastBottomNumber);
+			String buildTopNumber = topString.toString();
+			buildTopNumber += dividendMassive[i];
+			topString.insert(0, "_");
+			lastTopNumber = Integer.parseInt(buildTopNumber.toString());
+			while (topString.length() < lastTopPrintedString.length()) {
 				topString.insert(0, " ");
 			}
-			System.out.println(topString);
+			topString.append(dividendMassive[i]);
+			lastTopPrintedString = topString;
+			System.out.println(topString.toString());
 
 			StringBuilder bottomString = new StringBuilder();
-			bottomString.append(divider * answer.get(position));
-			if (Integer.parseInt(bottomString.toString()) == 0) {
-				indent++;
-			}
+			bottomString.append(answer.get(i) * divider);
+			lastBottomNumber = Integer.parseInt(bottomString.toString());
 			while (bottomString.length() < topString.length()) {
 				bottomString.insert(0, " ");
 			}
-			System.out.println(bottomString.toString());
-			System.out.println(getBottomLine(lastTopString, topString));
-
+			System.out.println(bottomString);
+			System.out.println(getBottomLine(lastTopNumber, lastTopPrintedString));
 		}
-		System.out.println(getLastString(lastTopString));
+		System.out.println(getLastString(lastTopNumber));
 	}
 
 	private String getLastString(int lastTopString) {
