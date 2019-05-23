@@ -5,6 +5,9 @@ import java.util.ArrayList;
 public class Divider {
 
 	public ArrayList<Integer> divide(String dividend, String divider) {
+		if(dividend == null || divider == null) {
+			return null;
+		}
 		int[] numbersOfDividend = makeNumMassive(dividend, divider);
 		ArrayList<Integer> result = calcResult(numbersOfDividend, divider);
 		return result;

@@ -53,4 +53,26 @@ class DividerTest {
 		int[] actual = dividerInstanse.makeNumMassive("362514", "41");
 		assertArrayEquals(expected, actual);
 	}
+	
+	@Test
+	public void givenDividendNullDividerNull_whenDivide_thenNull() {
+		ArrayList<Integer> expected = null;
+		ArrayList<Integer> actual = dividerInstanse.divide(null, null);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void givenDividend7894DividerNull_whenDivide_thenNull() {
+		ArrayList<Integer> expected = null;
+		ArrayList<Integer> actual = dividerInstanse.divide("7894", null);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void givenDividendNullDivider4_whenDivide_thenNull() {
+		ArrayList<Integer> expected = null;
+		ArrayList<Integer> actual = dividerInstanse.divide(null, "4");
+		assertEquals(expected, actual);
+	}
+	
 }
