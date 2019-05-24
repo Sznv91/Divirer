@@ -1,20 +1,24 @@
 package com.foxminded.divider;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		Scanner scanner = new Scanner(System.in);
 		System.out.println("Please entry dividend");
-		String dividend = reader.readLine();
+		int dividend = scanner.nextInt();
 		System.out.println("Please entry divider");
-		String divider = reader.readLine();
-		reader.close();
-		Printer printerInstance = new Printer();
-		printerInstance.draw(dividend, divider);		
+		int divider = scanner.nextInt();
+		scanner.close();
+		//Printer printerInstance = new Printer();
+		//printerInstance.draw(dividend, divider);	
+		Divider dividerInstance = new Divider();
+		int [] toTest = dividerInstance.makeNumMassive(dividend, divider);
+		for (int i : toTest) {
+			System.out.println(i);
+		}
 	}
 
 }

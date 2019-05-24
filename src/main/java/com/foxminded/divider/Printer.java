@@ -8,7 +8,7 @@ public class Printer {
 	private static ArrayList<Integer> answer;
 	private static int[] dividendMassive;
 
-	public void draw(String dividend, String divider) {
+	public void draw(int dividend, int divider) {
 		Divider dividerInstanse = new Divider();
 		this.dividend = Integer.parseInt(dividend);
 		this.divider = Integer.parseInt(divider);
