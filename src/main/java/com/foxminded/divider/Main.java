@@ -16,12 +16,10 @@ public class Main {
 		//Printer printerInstance = new Printer();
 		//printerInstance.draw(dividend, divider);	
 		Divider dividerInstance = new Divider();
-//		int [] toTest = dividerInstance.makeNumMassive(dividend, divider);
-//		for (int i : toTest) {
-//			System.out.println(i);
-//		}
-		ArrayList<Integer> forTest = dividerInstance.divide(dividend, divider);
-		System.out.println(forTest);
+		int[] forTest = dividerInstance.divide(dividend, divider);
+		for (int i : forTest) {
+			System.out.println(i);
+		}
 	}
 
 }
