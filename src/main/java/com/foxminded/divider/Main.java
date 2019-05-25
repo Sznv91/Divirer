@@ -1,6 +1,7 @@
 package com.foxminded.divider;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -15,10 +16,12 @@ public class Main {
 		//Printer printerInstance = new Printer();
 		//printerInstance.draw(dividend, divider);	
 		Divider dividerInstance = new Divider();
-		int [] toTest = dividerInstance.makeNumMassive(dividend, divider);
-		for (int i : toTest) {
-			System.out.println(i);
-		}
+//		int [] toTest = dividerInstance.makeNumMassive(dividend, divider);
+//		for (int i : toTest) {
+//			System.out.println(i);
+//		}
+		ArrayList<Integer> forTest = dividerInstance.divide(dividend, divider);
+		System.out.println(forTest);
 	}
 
 }

@@ -6,11 +6,11 @@ public class Divider {
 
 	public ArrayList<Integer> divide(int dividend, int divider) {
 		int[] numbersOfDividend = makeNumMassive(dividend, divider);
-		//ArrayList<Integer> result = calcResult(numbersOfDividend, divider);
-		//return result;
+		ArrayList<Integer> result = calcResult(numbersOfDividend, divider);
+		return result;
 	}
 
-	private Integer findingDivider(int dividend, int divider) {
+	private Integer findingAnswerCell(int dividend, int divider) {
 		int result = 9;
 		while (true) {
 			if (dividend - (divider * result) >= 0) {
@@ -37,32 +37,31 @@ public class Divider {
 			numbersOfDividend[i] = Integer.parseInt(otherDigits.substring(0,1));
 			otherDigits.delete(0, 1);
 		}
+		System.out.println(joiningDigits(numbersOfDividend[0], numbersOfDividend[1]) + " Ожидается 3625");
 		return numbersOfDividend;
 	}
 
 	private ArrayList<Integer> calcResult(int[] numbersOfDividend, int divider) {
 		ArrayList<Integer> result = new ArrayList<Integer>();
-		for (int i = 0; i < numbersOfDividend.length; i++) {
-			int partOfResult = findingDivider(numbersOfDividend[i], Integer.parseInt(divider));
-			result.add(partOfResult);
-			int tmp = Integer.parseInt(divider) * partOfResult;
-			int remainder = numbersOfDividend[i] - tmp;
-			StringBuilder sb = new StringBuilder();
-			sb.append(remainder);
-			if (i < numbersOfDividend.length - 1) {
-				sb.append(numbersOfDividend[i + 1]);
-				numbersOfDividend[i + 1] = Integer.parseInt(sb.toString());
-			}
+		int lastValue = 0;
+		for(int i = 0; i < numbersOfDividend.length; i++) {
+			lastValue = joiningDigits(lastValue, numbersOfDividend[i]);
+			int answerCell = findingAnswerCell(lastValue, divider);
+			result.add(answerCell);
+			lastValue = lastValue - (answerCell * divider);
 		}
+		
 		return result;
 	}
 	
 	private Integer getDigit (int numeric, int position) {
+		int cou
 		StringBuilder sb = new StringBuilder();
 		sb.append(numeric);
 		String result = sb.substring(position,position+1).toString();
 		return Integer.parseInt(result);
 	}
+	
 	private Integer howManyDigit(int numeric) {
 		if(numeric == 0) {
 			return 1;
@@ -71,6 +70,26 @@ public class Divider {
 		while(numeric > 0) {
 			numeric = numeric / 10;
 			result ++;
+		}
+		return result;
+	}
+	private Integer joiningDigits (int firstDigit, int secondDigit) {
+		if(firstDigit == 0) {
+			return secondDigit;
+		}
+		int multipler = 1;
+		int result = 0;
+		int counter = howManyDigit(secondDigit);
+		while(counter != 0) {
+			result += getDigit(secondDigit, counter - 1) * multipler;
+			counter--;
+			multipler = multipler*10;
+		}
+		counter = howManyDigit(firstDigit);
+		while(counter != 0) {
+			result += getDigit(firstDigit, counter -1) * multipler;
+			counter--;
+			multipler = multipler*10;
 		}
 		return result;
 	}
