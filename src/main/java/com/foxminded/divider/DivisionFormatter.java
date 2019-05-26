@@ -2,50 +2,52 @@ package com.foxminded.divider;
 
 import java.util.ArrayList;
 
-public class Printer {
+public class DivisionFormatter {
 
 	private static int dividend, divider;
-	private static ArrayList<Integer> answer;
+	private static int[] answer;
 	private static int[] dividendMassive;
+	private ArrayList<String> result = new ArrayList<String>();
 
-	public void draw(int dividend, int divider) {
+	public ArrayList<String> format(int dividend, int divider) {
 		Divider dividerInstanse = new Divider();
-		this.dividend = Integer.parseInt(dividend);
-		this.divider = Integer.parseInt(divider);
+		this.dividend = dividend;
+		this.divider = divider;
 		this.answer = dividerInstanse.divide(dividend, divider);
-		this.dividendMassive = dividerInstanse.makeNumMassive(dividend, divider);
+		this.dividendMassive = dividerInstanse.getNumbersOfDividend();
 
-		printFirstString();
-		printSecondString();
-		printThirdString();
-		printOtherString();
+		formatFirstString();
+		formatSecondString();
+		formatThirdString();
+		formatOtherString();
+		return result;
 
 	}
 
-	private void printFirstString() {
+	private void formatFirstString() {
 		StringBuilder firstString = new StringBuilder("_");
 		firstString.append(dividend + "|" + divider);
-		System.out.println(firstString.toString());
+		result.add(firstString.toString());
 	}
 
-	private void printSecondString() {
+	private void formatSecondString() {
 		StringBuilder secondString = new StringBuilder();
-		secondString.append(" " + divider * answer.get(0));
+		secondString.append(" " + divider * answer[0]);
 		for (int i = 0; i < dividendMassive.length - 1; i++) {
 			secondString.append(" ");
 		}
 		secondString.append("|");
-		for (int i = 0; i < answer.size(); i++) {
+		for (int i = 0; i < answer.length; i++) {
 			secondString.append("-");
 		}
-		System.out.println(secondString.toString());
+		result.add(secondString.toString());
 	}
 
-	private void printThirdString() {
+	private void formatThirdString() {
 		StringBuilder thirdString = new StringBuilder();
 		thirdString.append(" ");
 		for (int i = 0; i < howManyDigit(dividend); i++) {
-			if (i < howManyDigit(answer.get(0) * divider)) {
+			if (i < howManyDigit(answer[0] * divider)) {
 				thirdString.append("-");
 			} else {
 				thirdString.append(" ");
@@ -55,12 +57,12 @@ public class Printer {
 		for (int i : answer) {
 			thirdString.append(i);
 		}
-		System.out.println(thirdString.toString());
+		result.add(thirdString.toString());
 	}
 
-	private void printOtherString() {
+	private void formatOtherString() {
 		int lastTopNumber = dividendMassive[0];
-		int lastBottomNumber = answer.get(0) * divider;
+		int lastBottomNumber = answer[0] * divider;
 		StringBuilder lastTopPrintedString = new StringBuilder();
 		lastTopPrintedString.append(lastTopNumber);
 		lastTopPrintedString.insert(0, "_");
@@ -77,23 +79,23 @@ public class Printer {
 			}
 			topString.append(dividendMassive[i]);
 			lastTopPrintedString = topString;
-			System.out.println(topString.toString());
+			result.add(topString.toString());
 
 			StringBuilder bottomString = new StringBuilder();
-			bottomString.append(answer.get(i) * divider);
+			bottomString.append(answer[i] * divider);
 			lastBottomNumber = Integer.parseInt(bottomString.toString());
 			while (bottomString.length() < topString.length()) {
 				bottomString.insert(0, " ");
 			}
-			System.out.println(bottomString);
-			System.out.println(getBottomLine(lastTopNumber, lastTopPrintedString));
+			result.add(bottomString.toString());
+			result.add(getBottomLine(lastTopNumber, lastTopPrintedString));
 		}
-		System.out.println(getLastString(lastTopNumber));
+		result.add(getLastString(lastTopNumber));
 	}
 
 	private String getLastString(int lastTopString) {
 		StringBuilder lastString = new StringBuilder();
-		int bottomNumber = divider * answer.get(answer.size() - 1);
+		int bottomNumber = divider * answer[answer.length - 1];
 		lastString.append(lastTopString - bottomNumber);
 		while (lastString.length() <= howManyDigit(dividend)) {
 			lastString.insert(0, " ");

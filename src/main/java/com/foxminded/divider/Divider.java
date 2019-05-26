@@ -1,9 +1,11 @@
 package com.foxminded.divider;
 
 public class Divider {
+	
+	private int[] numbersOfDividend;
 
 	public int[] divide(int dividend, int divider) {
-		int[] numbersOfDividend = makeNumMassive(dividend, divider);
+		numbersOfDividend = makeNumMassive(dividend, divider);
 		int[] result = calcResult(numbersOfDividend, divider);
 		return result;
 	}
@@ -19,14 +21,14 @@ public class Divider {
 		}
 	}
 
-	protected int[] makeNumMassive(int dividend, int divider) {
+	private int[] makeNumMassive(int dividend, int divider) {
 		int firstCell = getDigit(dividend, 1);
 		int counter = 1;
 		for (int i = 2; i <= howManyDigit(dividend); i++) {
 			if (firstCell / divider > 0) {
 				break;
 			} else {
-				firstCell = joiningDigits(firstCell, getDigit(dividend, i));
+				firstCell = appendDigits(firstCell, getDigit(dividend, i));
 				counter++;
 			}
 		}
@@ -43,7 +45,7 @@ public class Divider {
 		int[] result = new int [numbersOfDividend.length];
 		int lastValue = 0;
 		for (int i = 0; i < numbersOfDividend.length; i++) {
-			lastValue = joiningDigits(lastValue, numbersOfDividend[i]);
+			lastValue = appendDigits(lastValue, numbersOfDividend[i]);
 			int answerCell = findingAnswerCell(lastValue, divider);
 			result[i] = answerCell;
 			lastValue = lastValue - (answerCell * divider);
@@ -84,7 +86,7 @@ public class Divider {
 		return result;
 	}
 
-	private Integer joiningDigits(int firstDigit, int secondDigit) {
+	private Integer appendDigits(int firstDigit, int secondDigit) {
 		if (firstDigit == 0) {
 			return secondDigit;
 		}
@@ -104,4 +106,9 @@ public class Divider {
 		}
 		return result;
 	}
+	
+	public int [] getNumbersOfDividend () {
+		return numbersOfDividend;
+	}
+	
 }

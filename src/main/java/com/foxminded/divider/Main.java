@@ -13,11 +13,9 @@ public class Main {
 		System.out.println("Please entry divider");
 		int divider = scanner.nextInt();
 		scanner.close();
-		//Printer printerInstance = new Printer();
-		//printerInstance.draw(dividend, divider);	
-		Divider dividerInstance = new Divider();
-		int[] forTest = dividerInstance.divide(dividend, divider);
-		for (int i : forTest) {
+		DivisionFormatter divisionFormatterInstance = new DivisionFormatter();
+		ArrayList<String> toPrint = divisionFormatterInstance.format(dividend, divider);
+		for(String i : toPrint) {
 			System.out.println(i);
 		}
 	}
