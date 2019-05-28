@@ -2,11 +2,9 @@ package com.foxminded.divider;
 
 public class Divider {
 	
-	private int[] numbersOfDividend;
-
-	public int[] divide(int dividend, int divider) {
-		numbersOfDividend = makeNumMassive(dividend, divider);
-		int[] result = calcResult(numbersOfDividend, divider);
+	public int[][] divide(int dividend, int divider) {
+		int[] numbersOfDividend = makeNumMassive(dividend, divider);
+		int[][] result = calcResult(numbersOfDividend, divider);
 		return result;
 	}
 
@@ -41,14 +39,16 @@ public class Divider {
 		return numbersOfDividend;
 	}
 
-	private int[] calcResult(int[] numbersOfDividend, int divider) {
-		int[] result = new int [numbersOfDividend.length];
+	private int[][] calcResult(int[] numbersOfDividend, int divider) {
+		int[][] result = new int [4][numbersOfDividend.length];
+		result[0] = numbersOfDividend;
 		int lastValue = 0;
-		for (int i = 0; i < numbersOfDividend.length; i++) {
+		for (int i = 0; i < result[0].length; i++) {
 			lastValue = appendDigits(lastValue, numbersOfDividend[i]);
-			int answerCell = findingAnswerCell(lastValue, divider);
-			result[i] = answerCell;
-			lastValue = lastValue - (answerCell * divider);
+			result [2][i] = lastValue; //top number
+			result[1][i] = findingAnswerCell(lastValue, divider); //answer
+			result[3][i] = result[1][i] * divider; //bottom number
+			lastValue = lastValue - result[3][i];
 		}
 
 		return result;
@@ -105,10 +105,6 @@ public class Divider {
 			multipler = multipler * 10;
 		}
 		return result;
-	}
-	
-	public int [] getNumbersOfDividend () {
-		return numbersOfDividend;
 	}
 	
 }

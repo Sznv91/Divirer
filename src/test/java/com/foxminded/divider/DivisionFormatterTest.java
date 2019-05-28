@@ -49,7 +49,7 @@ class DivisionFormatterTest {
 		expected.add("_36925814|41");
 		expected.add(" 369     |------");
 		expected.add(" ---     |900629");
-		expected.add("  _02");
+		expected.add("   _2");
 		expected.add("    0");
 		expected.add("    -");
 		expected.add("   _25");
