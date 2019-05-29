@@ -8,7 +8,7 @@ public class Divider {
 		return result;
 	}
 
-	private Integer findingAnswerCell(int dividend, int divider) {
+	private Integer findAnswerDigit(int dividend, int divider) {
 		int result = 9;
 		while (true) {
 			if (dividend - (divider * result) >= 0) {
@@ -46,7 +46,7 @@ public class Divider {
 		for (int i = 0; i < result[0].length; i++) {
 			lastValue = appendDigits(lastValue, numbersOfDividend[i]);
 			result [2][i] = lastValue; //top number
-			result[1][i] = findingAnswerCell(lastValue, divider); //answer
+			result[1][i] = findAnswerDigit(lastValue, divider); //answer
 			result[3][i] = result[1][i] * divider; //bottom number
 			lastValue = lastValue - result[3][i];
 		}
