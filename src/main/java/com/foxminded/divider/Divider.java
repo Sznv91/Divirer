@@ -1,25 +1,17 @@
 package com.foxminded.divider;
 
 public class Divider {
-	
-	public int[][] divide(int dividend, int divider) {
-		int[] numbersOfDividend = makeNumMassive(dividend, divider);
-		int[][] result = calcResult(numbersOfDividend, divider);
+
+	private DivisionResult result;
+
+	public DivisionResult getResult(int dividend, int divider) {
+		int[] numbersOfDividend = prepareMassive(dividend, divider);
+		result = new DivisionResult(numbersOfDividend, divider);
+		divide(result);
 		return result;
 	}
 
-	private Integer findAnswerDigit(int dividend, int divider) {
-		int result = 9;
-		while (true) {
-			if (dividend - (divider * result) >= 0) {
-				return result;
-			} else {
-				result--;
-			}
-		}
-	}
-
-	private int[] makeNumMassive(int dividend, int divider) {
+	private int[] prepareMassive(int dividend, int divider) {
 		int firstCell = getDigit(dividend, 1);
 		int counter = 1;
 		for (int i = 2; i <= howManyDigit(dividend); i++) {
@@ -39,19 +31,38 @@ public class Divider {
 		return numbersOfDividend;
 	}
 
-	private int[][] calcResult(int[] numbersOfDividend, int divider) {
-		int[][] result = new int [4][numbersOfDividend.length];
-		result[0] = numbersOfDividend;
-		int lastValue = 0;
-		for (int i = 0; i < result[0].length; i++) {
-			lastValue = appendDigits(lastValue, numbersOfDividend[i]);
-			result [2][i] = lastValue; //top number
-			result[1][i] = findAnswerDigit(lastValue, divider); //answer
-			result[3][i] = result[1][i] * divider; //bottom number
-			lastValue = lastValue - result[3][i];
+	private void divide(DivisionResult result) {
+		int[] dividendMassiv = result.getDivident();
+		int[] upperDigits = new int[dividendMassiv.length + 1];
+		int[] downDigits = new int[dividendMassiv.length];
+		int divider = result.getDivider();
+		int upperDivedend = 0;
+		int[] answer = new int[dividendMassiv.length];
+		for (int i = 0; i < dividendMassiv.length; i++) {
+			upperDivedend = appendDigits(upperDivedend, dividendMassiv[i]);
+			upperDigits[i] = upperDivedend;
+			answer[i] = findAnswerDigit(upperDivedend, divider);
+			int downerDivident = answer[i] * divider;
+			downDigits[i] = downerDivident;
+			if (i == dividendMassiv.length - 1) {
+				upperDigits[i + 1] = upperDivedend - downerDivident;
+			}
+			upperDivedend = upperDivedend - downerDivident;
 		}
+		result.setAnswer(answer);
+		result.setUpperResults(upperDigits);
+		result.setDownerResults(downDigits);
+	}
 
-		return result;
+	private Integer findAnswerDigit(int dividend, int divider) {
+		int result = 9;
+		while (true) {
+			if (dividend - (divider * result) >= 0) {
+				return result;
+			} else {
+				result--;
+			}
+		}
 	}
 
 	private Integer getDigit(int numeric, int position) {
@@ -106,5 +117,5 @@ public class Divider {
 		}
 		return result;
 	}
-	
+
 }

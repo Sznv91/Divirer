@@ -4,75 +4,81 @@ import java.util.ArrayList;
 
 public class DivisionFormatter {
 
-	public ArrayList<String> format(int dividend, int divider) {
-		Divider dividerInstanse = new Divider();
-		int[][] divideMassiv = dividerInstanse.divide(dividend, divider);
-		ArrayList<String> result = new ArrayList<String>();
+	public String format(DivisionResult answer) {
+		int divider = answer.getDivider();
+		int[] dividend = answer.getDivident();
+		int[] ans = answer.getAnswer();
+		int[] upper = answer.getUpperResults();
+		int[] down = answer.getDownerResults();
+		StringBuilder result = new StringBuilder();
 
 		formatFirstString(dividend, divider, result);
-		formatSecondString(dividend, divider, result, divideMassiv);
-		formatThirdString(dividend, divider, result, divideMassiv);
-		formatOtherString(dividend, divider, result, divideMassiv);
-		return result;
+		formatSecondString(dividend.length, divider, result, ans, down);
+		formatThirdString(dividend, divider, result, ans);
+		formatOtherString(result, upper, down);
+		return result.toString();
 	}
 
-	private void formatFirstString(int dividend, int divider, ArrayList<String> result) {
+	private void formatFirstString(int[] dividend, int divider, StringBuilder result) {
 		StringBuilder firstString = new StringBuilder("_");
-		firstString.append(dividend + "|" + divider);
-		result.add(firstString.toString());
+		for (int digit : dividend) {
+			firstString.append(digit);
+		}
+		firstString.append("|" + divider);
+		result.append(firstString.toString() + System.lineSeparator());
 	}
 
-	private void formatSecondString(int dividend, int divider, ArrayList<String> result, int[][] dividendMassive) {
+	private void formatSecondString(int dividendLengh, int divider, StringBuilder result, int[] answer, int[] downder) {
 		StringBuilder secondString = new StringBuilder();
-		secondString.append(" " + dividendMassive[3][0]);
-		for (int i = 0; i < dividendMassive[0].length - 1; i++) {
+		secondString.append(" " + downder[0]);
+		for (int i = 0; i < dividendLengh - 1; i++) {
 			secondString.append(" ");
 		}
 		secondString.append("|");
-		for (int i = 0; i < dividendMassive[1].length; i++) {
+		for (int i = 0; i < answer.length; i++) {
 			secondString.append("-");
 		}
-		result.add(secondString.toString());
+		result.append(secondString.toString() + System.lineSeparator());
 	}
 
-	private void formatThirdString(int dividend, int divider, ArrayList<String> result, int[][] dividendMassive) {
+	private void formatThirdString(int[] dividend, int divider, StringBuilder result, int[] answer) {
 		StringBuilder thirdString = new StringBuilder();
 		thirdString.append(" ");
-		for (int i = 0; i < howManyDigit(dividend); i++) {
-			if (i < howManyDigit(dividendMassive[3][0])) {
+		for (int i = 0; i <= dividend.length + 1; i++) {
+			if (i < howManyDigit(dividend[0])) {
 				thirdString.append("-");
 			} else {
 				thirdString.append(" ");
 			}
 		}
 		thirdString.append("|");
-		for (int i : dividendMassive[1]) {
+		for (int i : answer) {
 			thirdString.append(i);
 		}
-		result.add(thirdString.toString());
+		result.append(thirdString.toString() + System.lineSeparator());
 	}
 
-	private void formatOtherString(int dividend, int divider, ArrayList<String> result, int[][] dividendMassive) {
-		int lastLenghString = howManyDigit(dividendMassive[0][0]);
-
-		for (int i = 1; i < dividendMassive[0].length; i++) {
-			StringBuilder formatedString = new StringBuilder();
-			formatedString.append("_" + dividendMassive[2][i]);
-			lastLenghString++;
-			while (formatedString.length() <= lastLenghString) {
-				formatedString.insert(0, " ");
+	private void formatOtherString(StringBuilder result, int[] upString, int[] downString) {
+		StringBuilder otherString;
+		int lastLenghSting = howManyDigit(upString[0]) + 1;
+		for (int i = 1; i < downString.length; i++) {
+			otherString = new StringBuilder();
+			otherString.append(upString[i]);
+			while (otherString.length() != lastLenghSting + 1) {
+				otherString.insert(0, " ");
 			}
-			result.add(formatedString.toString());
-
-			formatedString = new StringBuilder();
-			formatedString.append(dividendMassive[3][i]);
-			while (formatedString.length() <= lastLenghString) {
-				formatedString.insert(0, " ");
+			lastLenghSting = otherString.length();
+			result.append(otherString.toString() + System.lineSeparator());
+			otherString = new StringBuilder();
+			otherString.append(downString[i]);
+			while (otherString.length() != lastLenghSting) {
+				otherString.insert(0, " ");
 			}
-			result.add(formatedString.toString());
-			result.add(getBottomLine(dividendMassive[2][i], formatedString));
+			otherString.append(System.lineSeparator());
+			otherString.append(getBottomLine(upString[i], otherString)); // GET BUTTOM LINE
+			result.append(otherString.toString() + System.lineSeparator());
+
 		}
-		result.add(getLastString(dividendMassive, lastLenghString));
 	}
 
 	private String getLastString(int[][] dividendMassive, int lastLenghString) {
@@ -91,7 +97,7 @@ public class DivisionFormatter {
 		while (howManyDigit(lastNumber) > bottomLine.length()) {
 			bottomLine.append("-");
 		}
-		while (printedString.length() > bottomLine.length()) {
+		while (printedString.length()-2 > bottomLine.length()) {
 			bottomLine.insert(0, " ");
 		}
 		return bottomLine.toString();
