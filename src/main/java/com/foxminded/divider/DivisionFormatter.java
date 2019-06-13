@@ -1,7 +1,5 @@
 package com.foxminded.divider;
 
-import java.util.ArrayList;
-
 public class DivisionFormatter {
 
 	public String format(DivisionResult answer) {
@@ -75,10 +73,10 @@ public class DivisionFormatter {
 				otherString.insert(0, " ");
 			}
 			otherString.append(System.lineSeparator());
-			otherString.append(getBottomLine(upString[i], otherString)); // GET BUTTOM LINE
+			otherString.append(getBottomLine(upString[i], otherString));
 			result.append(otherString.toString() + System.lineSeparator());
-
 		}
+		
 	}
 
 	private String getLastString(int[][] dividendMassive, int lastLenghString) {
