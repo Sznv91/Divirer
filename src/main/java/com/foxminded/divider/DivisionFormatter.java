@@ -12,7 +12,7 @@ public class DivisionFormatter {
 
 		formatFirstString(dividend, divider, result);
 		formatSecondString(dividend.length, divider, result, ans, down);
-		formatThirdString(dividend, divider, result, ans);
+		formatThirdString(dividend, result, ans);
 		formatOtherString(result, upper, down);
 		return result.toString();
 	}
@@ -39,10 +39,14 @@ public class DivisionFormatter {
 		result.append(secondString.toString() + System.lineSeparator());
 	}
 
-	private void formatThirdString(int[] dividend, int divider, StringBuilder result, int[] answer) {
+	private void formatThirdString(int[] dividend, StringBuilder result, int[] answer) {
 		StringBuilder thirdString = new StringBuilder();
 		thirdString.append(" ");
-		for (int i = 0; i <= dividend.length + 1; i++) {
+		int numberOfDigits = 0;
+		for (int i = 0; i < dividend.length - 1; i++) {
+			numberOfDigits += howManyDigit(dividend[i]);
+		}
+		for (int i = 0; i <= numberOfDigits; i++) {
 			if (i < howManyDigit(dividend[0])) {
 				thirdString.append("-");
 			} else {
@@ -61,7 +65,7 @@ public class DivisionFormatter {
 		int lastLenghSting = howManyDigit(upString[0]) + 1;
 		for (int i = 1; i < downString.length; i++) {
 			otherString = new StringBuilder();
-			otherString.append(upString[i]);
+			otherString.append("_" + upString[i]);
 			while (otherString.length() != lastLenghSting + 1) {
 				otherString.insert(0, " ");
 			}
@@ -76,18 +80,12 @@ public class DivisionFormatter {
 			otherString.append(getBottomLine(upString[i], otherString));
 			result.append(otherString.toString() + System.lineSeparator());
 		}
-		
-	}
-
-	private String getLastString(int[][] dividendMassive, int lastLenghString) {
-		StringBuilder lastString = new StringBuilder();
-		int lastNumber = dividendMassive[2][dividendMassive[2].length - 1]
-				- dividendMassive[3][dividendMassive[3].length - 1];
-		lastString.append(lastNumber);
-		while (lastString.length() <= lastLenghString) {
-			lastString.insert(0, " ");
+		otherString = new StringBuilder();
+		otherString.append(upString[upString.length - 1]);
+		while (otherString.length() < lastLenghSting) {
+			otherString.insert(0, " ");
 		}
-		return lastString.toString();
+		result.append(otherString);
 	}
 
 	private String getBottomLine(int lastNumber, StringBuilder printedString) {
@@ -95,7 +93,7 @@ public class DivisionFormatter {
 		while (howManyDigit(lastNumber) > bottomLine.length()) {
 			bottomLine.append("-");
 		}
-		while (printedString.length()-2 > bottomLine.length()) {
+		while (printedString.length() - 2 > bottomLine.length()) {
 			bottomLine.insert(0, " ");
 		}
 		return bottomLine.toString();
