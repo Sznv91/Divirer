@@ -4,11 +4,32 @@ public class Divider {
 
 	private DivisionResult result;
 
-	public DivisionResult getResult(int dividend, int divider) {
-		int[] numbersOfDividend = prepareMassive(dividend, divider);
-		result = new DivisionResult(numbersOfDividend, divider);
-		divide(result);
-		return result;
+	public void getResult(int dividend, int divider) { // DivisionResult
+//		int[] numbersOfDividend = prepareMassive(dividend, divider);
+//		result = new DivisionResult(numbersOfDividend, divider);
+//		divide(result);
+//		return result;
+		div(dividend, divider);
+	}
+
+	private void div(int dividend, int divider) {
+		int[] divMass = new int[howManyDigit(dividend)];
+		for (int i = 0; i < divMass.length; i++) {
+			divMass[i] = getDigit(dividend, i + 1);
+		}
+		int tempResult = divMass[0];
+		int answer = 0;
+		for (int i = 1; i < divMass.length; i++) {
+			while (tempResult / divider == 0) {
+				tempResult = appendDigits(tempResult, divMass[i]);
+				if(answer != 0) {
+					answer = appendDigits(answer, 0);
+				}
+				i++;
+			}
+			
+			System.out.println(tempResult);
+		}
 	}
 
 	private int[] prepareMassive(int dividend, int divider) {
