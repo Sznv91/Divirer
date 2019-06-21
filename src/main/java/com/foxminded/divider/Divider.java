@@ -17,18 +17,26 @@ public class Divider {
 		for (int i = 0; i < divMass.length; i++) {
 			divMass[i] = getDigit(dividend, i + 1);
 		}
-		int tempResult = divMass[0];
+		int upResult = 0;
 		int answer = 0;
-		for (int i = 1; i < divMass.length; i++) {
-			while (tempResult / divider == 0) {
-				tempResult = appendDigits(tempResult, divMass[i]);
-				if(answer != 0) {
+		for (int i = 0; i < divMass.length; i++) {
+			if (upResult / divider == 0) {
+				upResult = appendDigits(upResult, divMass[i]);
+				if (answer != 0) {
 					answer = appendDigits(answer, 0);
 				}
-				i++;
+			} else {
+				int partOfAnswer = upResult / divider;
+				int downResult = partOfAnswer * divider;
+				answer = appendDigits(answer, (partOfAnswer));
+				upResult = upResult - downResult;
+				upResult = appendDigits(upResult, divMass[i]);
+				if (i == divMass.length - 1) {
+					partOfAnswer = upResult / divider;
+					answer = appendDigits(answer, (partOfAnswer));
+				}
+				System.out.println(upResult + " answer: " + answer + " expected 900629");
 			}
-			
-			System.out.println(tempResult);
 		}
 	}
 
