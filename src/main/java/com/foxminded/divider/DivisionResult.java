@@ -6,7 +6,7 @@ public class DivisionResult {
 	private int dividend;
 	private int[] dividendMassive;
 	private int divider;
-	private ArrayList<Integer> answer;
+	private int answer;
 	private ArrayList<Integer> upperResults;
 	private ArrayList<Integer> downerResults;
 
@@ -40,11 +40,11 @@ public class DivisionResult {
 		this.downerResults = downerResults;
 	}
 
-	public ArrayList<Integer> getAnswer() {
+	public int getAnswer() {
 		return answer;
 	}
 
-	public void setAnswer(ArrayList<Integer> answer) {
+	public void setAnswer(int answer) {
 		this.answer = answer;
 	}
 

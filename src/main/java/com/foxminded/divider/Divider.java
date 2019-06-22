@@ -20,12 +20,12 @@ public class Divider {
 		ArrayList<Integer> upResultArray = new ArrayList<Integer>();
 		ArrayList<Integer> downResultArray = new ArrayList<Integer>();
 		int upResult = 0;
-		ArrayList<Integer> answer = new ArrayList<Integer>();
+		int answer = 0;
 		for (int i = 0; i < dividendMassive.length; i++) {
 			if (upResult / divider == 0) {
 				upResult = appendDigits(upResult, dividendMassive[i]);
-				if (!answer.isEmpty()) {
-					answer.add(0);
+				if (answer != 0) {
+					answer = appendDigits(answer, 0);
 					upResultArray.add(0);
 					downResultArray.add(0);
 				}
@@ -34,12 +34,12 @@ public class Divider {
 				int partOfAnswer = upResult / divider;
 				int downResult = partOfAnswer * divider;
 				downResultArray.add(downResult);
-				answer.add(partOfAnswer);
+				answer = appendDigits(answer, partOfAnswer);
 				upResult = upResult - downResult;
 				upResult = appendDigits(upResult, dividendMassive[i]);
 				if (i == dividendMassive.length - 1) {
 					partOfAnswer = upResult / divider;
-					answer.add(partOfAnswer);
+					answer = appendDigits(answer, partOfAnswer);
 					downResult = partOfAnswer * divider;
 					upResultArray.add(upResult);
 					downResultArray.add(downResult);

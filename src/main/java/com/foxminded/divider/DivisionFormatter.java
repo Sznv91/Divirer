@@ -6,29 +6,26 @@ public class DivisionFormatter {
 
 	public String format(DivisionResult answer) {
 		int divider = answer.getDivider();
-		int[] dividend = answer.getDividendMassive();
-		ArrayList<Integer> ans = answer.getAnswer();
+		int dividend = answer.getDivident();
+		int ans = answer.getAnswer();
 		ArrayList<Integer> upper = answer.getUpperResults();
 		ArrayList<Integer> down = answer.getDownerResults();
 		StringBuilder result = new StringBuilder();
 
 		formatFirstString(dividend, divider, result);
-		formatSecondString(dividend.length, divider, result, ans, down);
-		formatThirdString(dividend, result, ans);
+		formatSecondString(howManyDigit(dividend), divider, result, ans, down);
+		formatThirdString(dividend, result, ans, upper);
 		formatOtherString(result, upper, down);
 		return result.toString();
 	}
 
-	private void formatFirstString(int[] dividend, int divider, StringBuilder result) {
-		StringBuilder firstString = new StringBuilder("_");
-		for (int digit : dividend) {
-			firstString.append(digit);
-		}
+	private void formatFirstString(int dividend, int divider, StringBuilder result) {
+		StringBuilder firstString = new StringBuilder("_" + dividend);
 		firstString.append("|" + divider);
 		result.append(firstString.toString() + System.lineSeparator());
 	}
 
-	private void formatSecondString(int dividendLengh, int divider, StringBuilder result, ArrayList<Integer> answer,
+	private void formatSecondString(int dividendLengh, int divider, StringBuilder result, int answer,
 			ArrayList<Integer> downder) {
 		StringBuilder secondString = new StringBuilder();
 		secondString.append(" " + downder.get(0));
@@ -36,37 +33,29 @@ public class DivisionFormatter {
 			secondString.append(" ");
 		}
 		secondString.append("|");
-		for (int i = 0; i < answer.size(); i++) {
+		for (int i = 0; i < howManyDigit(answer); i++) {
 			secondString.append("-");
 		}
 		result.append(secondString.toString() + System.lineSeparator());
 	}
 
-	private void formatThirdString(int[] dividend, StringBuilder result, ArrayList<Integer> answer) {
+	private void formatThirdString(int dividend, StringBuilder result, int answer, ArrayList<Integer> upper) {
 		StringBuilder thirdString = new StringBuilder();
 		thirdString.append(" ");
-		int numberOfDigits = 0;
-		for (int i = 0; i < dividend.length - 1; i++) {
-			numberOfDigits += howManyDigit(dividend[i]);
-		}
-		for (int i = 0; i <= numberOfDigits; i++) {
-			if (i < howManyDigit(dividend[0])) {
+		for (int i = 0; i < howManyDigit(dividend); i++) {
+			if (i < howManyDigit(upper.get(0))) {
 				thirdString.append("-");
 			} else {
 				thirdString.append(" ");
 			}
 		}
-		thirdString.append("|");
-		for (int i : answer) {
-			thirdString.append(i);
-		}
+		thirdString.append("|" + answer);
 		result.append(thirdString.toString() + System.lineSeparator());
 	}
 
 	private void formatOtherString(StringBuilder result, ArrayList<Integer> upString, ArrayList<Integer> downString) {
 		StringBuilder otherString;
 		int lastLenghSting = howManyDigit(upString.get(0)) + 1;
-		System.out.println (lastLenghSting + " first element up string array36925814");
 		for (int i = 1; i < downString.size(); i++) {
 			otherString = new StringBuilder();
 			otherString.append("_" + upString.get(i));
@@ -74,7 +63,7 @@ public class DivisionFormatter {
 				otherString.insert(0, " ");
 			}
 			lastLenghSting = otherString.length();
-			if(downString.get(i).equals(0)) {
+			if (downString.get(i).equals(0)) {
 				continue;
 			}
 			result.append(otherString.toString() + System.lineSeparator());
