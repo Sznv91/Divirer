@@ -1,97 +1,57 @@
 package com.foxminded.divider;
 
+import java.util.ArrayList;
+
 public class Divider {
 
-	private DivisionResult result;
-
-	public void getResult(int dividend, int divider) { // DivisionResult
-//		int[] numbersOfDividend = prepareMassive(dividend, divider);
-//		result = new DivisionResult(numbersOfDividend, divider);
-//		divide(result);
-//		return result;
-		div(dividend, divider);
+	public DivisionResult getResult(int dividend, int divider) {
+		DivisionResult result = new DivisionResult(dividend, divider);
+		divide(result);
+		return result;
 	}
 
-	private void div(int dividend, int divider) {
-		int[] divMass = new int[howManyDigit(dividend)];
-		for (int i = 0; i < divMass.length; i++) {
-			divMass[i] = getDigit(dividend, i + 1);
+	private DivisionResult divide(DivisionResult result) {
+		int dividend = result.getDivident();
+		int divider = result.getDivider();
+		int[] dividendMassive = new int[howManyDigit(dividend)];
+		for (int i = 0; i < dividendMassive.length; i++) {
+			dividendMassive[i] = getDigit(dividend, i + 1);
 		}
+		ArrayList<Integer> upResultArray = new ArrayList<Integer>();
+		ArrayList<Integer> downResultArray = new ArrayList<Integer>();
 		int upResult = 0;
-		int answer = 0;
-		for (int i = 0; i < divMass.length; i++) {
+		ArrayList<Integer> answer = new ArrayList<Integer>();
+		for (int i = 0; i < dividendMassive.length; i++) {
 			if (upResult / divider == 0) {
-				upResult = appendDigits(upResult, divMass[i]);
-				if (answer != 0) {
-					answer = appendDigits(answer, 0);
+				upResult = appendDigits(upResult, dividendMassive[i]);
+				if (!answer.isEmpty()) {
+					answer.add(0);
+					upResultArray.add(0);
+					downResultArray.add(0);
 				}
 			} else {
+				upResultArray.add(upResult);
 				int partOfAnswer = upResult / divider;
 				int downResult = partOfAnswer * divider;
-				answer = appendDigits(answer, (partOfAnswer));
+				downResultArray.add(downResult);
+				answer.add(partOfAnswer);
 				upResult = upResult - downResult;
-				upResult = appendDigits(upResult, divMass[i]);
-				if (i == divMass.length - 1) {
+				upResult = appendDigits(upResult, dividendMassive[i]);
+				if (i == dividendMassive.length - 1) {
 					partOfAnswer = upResult / divider;
-					answer = appendDigits(answer, (partOfAnswer));
+					answer.add(partOfAnswer);
+					downResult = partOfAnswer * divider;
+					upResultArray.add(upResult);
+					downResultArray.add(downResult);
+					upResultArray.add(upResult - downResult);
 				}
-				System.out.println(upResult + " answer: " + answer + " expected 900629");
 			}
 		}
-	}
-
-	private int[] prepareMassive(int dividend, int divider) {
-		int firstCell = getDigit(dividend, 1);
-		int counter = 1;
-		for (int i = 2; i <= howManyDigit(dividend); i++) {
-			if (firstCell / divider > 0) {
-				break;
-			} else {
-				firstCell = appendDigits(firstCell, getDigit(dividend, i));
-				counter++;
-			}
-		}
-		int[] numbersOfDividend = new int[howManyDigit(dividend) - howManyDigit(firstCell) + 1];
-		numbersOfDividend[0] = firstCell;
-		for (int i = 1; i < numbersOfDividend.length; i++) {
-			numbersOfDividend[i] = getDigit(dividend, counter + 1);
-			counter++;
-		}
-		return numbersOfDividend;
-	}
-
-	private void divide(DivisionResult result) {
-		int[] dividendMassiv = result.getDivident();
-		int[] upperDigits = new int[dividendMassiv.length + 1];
-		int[] downDigits = new int[dividendMassiv.length];
-		int divider = result.getDivider();
-		int upperDivedend = 0;
-		int[] answer = new int[dividendMassiv.length];
-		for (int i = 0; i < dividendMassiv.length; i++) {
-			upperDivedend = appendDigits(upperDivedend, dividendMassiv[i]);
-			upperDigits[i] = upperDivedend;
-			answer[i] = findAnswerDigit(upperDivedend, divider);
-			int downerDivident = answer[i] * divider;
-			downDigits[i] = downerDivident;
-			if (i == dividendMassiv.length - 1) {
-				upperDigits[i + 1] = upperDivedend - downerDivident;
-			}
-			upperDivedend = upperDivedend - downerDivident;
-		}
+		result.setDividendMassive(dividendMassive);
 		result.setAnswer(answer);
-		result.setUpperResults(upperDigits);
-		result.setDownerResults(downDigits);
-	}
-
-	private Integer findAnswerDigit(int dividend, int divider) {
-		int result = 9;
-		while (true) {
-			if (dividend - (divider * result) >= 0) {
-				return result;
-			} else {
-				result--;
-			}
-		}
+		result.setUpperResults(upResultArray);
+		result.setDownerResults(downResultArray);
+		return result;
 	}
 
 	private Integer getDigit(int numeric, int position) {

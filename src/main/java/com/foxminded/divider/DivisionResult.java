@@ -1,19 +1,22 @@
 package com.foxminded.divider;
 
-public class DivisionResult {
-	private int[] dividend;
-	private int divider;
-	private int[] answer;
-	private int[] upperResults;
-	private int[] downerResults;
+import java.util.ArrayList;
 
-	public DivisionResult(int[] divident, int divider) {
+public class DivisionResult {
+	private int dividend;
+	private int[] dividendMassive;
+	private int divider;
+	private ArrayList<Integer> answer;
+	private ArrayList<Integer> upperResults;
+	private ArrayList<Integer> downerResults;
+
+	public DivisionResult(int divident, int divider) {
 		super();
 		this.dividend = divident;
 		this.divider = divider;
 	}
 
-	public int[] getDivident() {
+	public int getDivident() {
 		return dividend;
 	}
 
@@ -21,27 +24,36 @@ public class DivisionResult {
 		return divider;
 	}
 
-	public int[] getUpperResults() {
+	public ArrayList<Integer> getUpperResults() {
 		return upperResults;
 	}
 
-	public void setUpperResults(int[] upperResults) {
+	public void setUpperResults(ArrayList<Integer> upperResults) {
 		this.upperResults = upperResults;
 	}
 
-	public int[] getDownerResults() {
+	public ArrayList<Integer> getDownerResults() {
 		return downerResults;
 	}
 
-	public void setDownerResults(int[] downerResults) {
+	public void setDownerResults(ArrayList<Integer> downerResults) {
 		this.downerResults = downerResults;
 	}
 
-	public int[] getAnswer() {
+	public ArrayList<Integer> getAnswer() {
 		return answer;
 	}
 
-	public void setAnswer(int[] answer) {
+	public void setAnswer(ArrayList<Integer> answer) {
 		this.answer = answer;
 	}
+
+	public int[] getDividendMassive() {
+		return dividendMassive;
+	}
+
+	public void setDividendMassive(int[] dividendMassive) {
+		this.dividendMassive = dividendMassive;
+	}
+	
 }
