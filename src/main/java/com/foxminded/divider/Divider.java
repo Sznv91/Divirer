@@ -19,35 +19,35 @@ public class Divider {
 		}
 		ArrayList<Integer> incompleteQuotientArray = new ArrayList<Integer>();
 		ArrayList<Integer> remainderArray = new ArrayList<Integer>();
-		int incompleteQuotient = 0;
-		int remainder = 0;
+		int currentIncompleteQuotient = 0;
+		int currentRemainder = 0;
 		int partOfResult = 0;
 		int result = 0;
 		for (int i = 0; i < dividendMassive.length; i++) {
-			if (incompleteQuotient / divider == 0) {
-				incompleteQuotient = appendDigits(incompleteQuotient, dividendMassive[i]);
+			if (currentIncompleteQuotient / divider == 0) {
+				currentIncompleteQuotient = appendDigits(currentIncompleteQuotient, dividendMassive[i]);
 				if (result != 0) {
 					result = appendDigits(result, 0);
 					incompleteQuotientArray.add(0);
 					remainderArray.add(0);
 				}
 			} else {
-				incompleteQuotientArray.add(incompleteQuotient);
-				partOfResult = incompleteQuotient / divider;
-				remainder = partOfResult * divider;
-				remainderArray.add(remainder);
+				incompleteQuotientArray.add(currentIncompleteQuotient);
+				partOfResult = currentIncompleteQuotient / divider;
+				currentRemainder = partOfResult * divider;
+				remainderArray.add(currentRemainder);
 				result = appendDigits(result, partOfResult);
-				incompleteQuotient = incompleteQuotient - remainder;
-				incompleteQuotient = appendDigits(incompleteQuotient, dividendMassive[i]);
+				currentIncompleteQuotient = currentIncompleteQuotient - currentRemainder;
+				currentIncompleteQuotient = appendDigits(currentIncompleteQuotient, dividendMassive[i]);
 			}
 		}
 		// last iteration//
-		partOfResult = incompleteQuotient / divider;
+		partOfResult = currentIncompleteQuotient / divider;
 		result = appendDigits(result, partOfResult);
-		remainder = partOfResult * divider;
-		incompleteQuotientArray.add(incompleteQuotient);
-		remainderArray.add(remainder);
-		incompleteQuotientArray.add(incompleteQuotient - remainder);
+		currentRemainder = partOfResult * divider;
+		incompleteQuotientArray.add(currentIncompleteQuotient);
+		remainderArray.add(currentRemainder);
+		incompleteQuotientArray.add(currentIncompleteQuotient - currentRemainder);
 
 		divisionResult.setResult(result);
 		divisionResult.setIncompleteQuotient(incompleteQuotientArray);
@@ -75,33 +75,33 @@ public class Divider {
 		return result;
 	}
 
-	protected static Integer howManyDigit(int numeric) {
-		if (numeric == 0) {
+	protected static Integer howManyDigit(int number) {
+		if (number == 0) {
 			return 1;
 		}
 		int result = 0;
-		while (numeric > 0) {
-			numeric = numeric / 10;
+		while (number > 0) {
+			number = number / 10;
 			result++;
 		}
 		return result;
 	}
 
-	private Integer appendDigits(int firstDigit, int secondDigit) {
-		if (firstDigit == 0) {
-			return secondDigit;
+	private Integer appendDigits(int appended, int add) {
+		if (appended == 0) {
+			return add;
 		}
 		int multipler = 1;
 		int result = 0;
-		int counter = howManyDigit(secondDigit);
+		int counter = howManyDigit(add);
 		while (counter != 0) {
-			result += getDigit(secondDigit, counter) * multipler;
+			result += getDigit(add, counter) * multipler;
 			counter--;
 			multipler = multipler * 10;
 		}
-		counter = howManyDigit(firstDigit);
+		counter = howManyDigit(appended);
 		while (counter != 0) {
-			result += getDigit(firstDigit, counter) * multipler;
+			result += getDigit(appended, counter) * multipler;
 			counter--;
 			multipler = multipler * 10;
 		}

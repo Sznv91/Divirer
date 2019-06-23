@@ -12,8 +12,8 @@ public class Main {
 		System.out.println("Please entry divider");
 		int divider = scanner.nextInt();
 		scanner.close();
-		Divider div = new Divider();
-		DivisionResult result = div.getResult(dividend, divider);
+		Divider dividerInstance = new Divider();
+		DivisionResult result = dividerInstance.getResult(dividend, divider);
 		DivisionFormatter formatter = new DivisionFormatter();
 		System.out.println(formatter.format(result));
 	}
