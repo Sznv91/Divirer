@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class DivisionResult {
 	private int dividend;
 	private int divider;
-	private int answer;
-	private ArrayList<Integer> upperResults;
-	private ArrayList<Integer> downerResults;
+	private int result;
+	private ArrayList<Integer> incompleteQuotient;
+	private ArrayList<Integer> remainder;
 
 	public DivisionResult(int divident, int divider) {
 		super();
@@ -23,28 +23,28 @@ public class DivisionResult {
 		return divider;
 	}
 
-	public ArrayList<Integer> getUpperResults() {
-		return upperResults;
+	public ArrayList<Integer> getIncompleteQuotient() {
+		return incompleteQuotient;
 	}
 
-	public void setUpperResults(ArrayList<Integer> upperResults) {
-		this.upperResults = upperResults;
+	public void setIncompleteQuotient(ArrayList<Integer> incompleteQuotient) {
+		this.incompleteQuotient = incompleteQuotient;
 	}
 
-	public ArrayList<Integer> getDownerResults() {
-		return downerResults;
+	public ArrayList<Integer> getRemainder() {
+		return remainder;
 	}
 
-	public void setDownerResults(ArrayList<Integer> downerResults) {
-		this.downerResults = downerResults;
+	public void setRemainder(ArrayList<Integer> remainder) {
+		this.remainder = remainder;
 	}
 
-	public int getAnswer() {
-		return answer;
+	public int getResult() {
+		return result;
 	}
 
-	public void setAnswer(int answer) {
-		this.answer = answer;
+	public void setResult(int result) {
+		this.result = result;
 	}
 	
 }

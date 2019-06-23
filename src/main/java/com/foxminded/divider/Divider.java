@@ -10,49 +10,49 @@ public class Divider {
 		return result;
 	}
 
-	private DivisionResult divide(DivisionResult result) {
-		int dividend = result.getDivident();
-		int divider = result.getDivider();
+	private DivisionResult divide(DivisionResult divisionResult) {
+		int dividend = divisionResult.getDivident();
+		int divider = divisionResult.getDivider();
 		int[] dividendMassive = new int[howManyDigit(dividend)];
 		for (int i = 0; i < dividendMassive.length; i++) {
 			dividendMassive[i] = getDigit(dividend, i + 1);
 		}
-		ArrayList<Integer> upResultArray = new ArrayList<Integer>();
-		ArrayList<Integer> downResultArray = new ArrayList<Integer>();
-		int upResult = 0;
-		int downResult = 0;
-		int partOfAnswer = 0;
-		int answer = 0;
+		ArrayList<Integer> incompleteQuotientArray = new ArrayList<Integer>();
+		ArrayList<Integer> remainderArray = new ArrayList<Integer>();
+		int incompleteQuotient = 0;
+		int remainder = 0;
+		int partOfResult = 0;
+		int result = 0;
 		for (int i = 0; i < dividendMassive.length; i++) {
-			if (upResult / divider == 0) {
-				upResult = appendDigits(upResult, dividendMassive[i]);
-				if (answer != 0) {
-					answer = appendDigits(answer, 0);
-					upResultArray.add(0);
-					downResultArray.add(0);
+			if (incompleteQuotient / divider == 0) {
+				incompleteQuotient = appendDigits(incompleteQuotient, dividendMassive[i]);
+				if (result != 0) {
+					result = appendDigits(result, 0);
+					incompleteQuotientArray.add(0);
+					remainderArray.add(0);
 				}
 			} else {
-				upResultArray.add(upResult);
-				partOfAnswer = upResult / divider;
-				downResult = partOfAnswer * divider;
-				downResultArray.add(downResult);
-				answer = appendDigits(answer, partOfAnswer);
-				upResult = upResult - downResult;
-				upResult = appendDigits(upResult, dividendMassive[i]);
+				incompleteQuotientArray.add(incompleteQuotient);
+				partOfResult = incompleteQuotient / divider;
+				remainder = partOfResult * divider;
+				remainderArray.add(remainder);
+				result = appendDigits(result, partOfResult);
+				incompleteQuotient = incompleteQuotient - remainder;
+				incompleteQuotient = appendDigits(incompleteQuotient, dividendMassive[i]);
 			}
 		}
 		// last iteration//
-		partOfAnswer = upResult / divider;
-		answer = appendDigits(answer, partOfAnswer);
-		downResult = partOfAnswer * divider;
-		upResultArray.add(upResult);
-		downResultArray.add(downResult);
-		upResultArray.add(upResult - downResult);
+		partOfResult = incompleteQuotient / divider;
+		result = appendDigits(result, partOfResult);
+		remainder = partOfResult * divider;
+		incompleteQuotientArray.add(incompleteQuotient);
+		remainderArray.add(remainder);
+		incompleteQuotientArray.add(incompleteQuotient - remainder);
 
-		result.setAnswer(answer);
-		result.setUpperResults(upResultArray);
-		result.setDownerResults(downResultArray);
-		return result;
+		divisionResult.setResult(result);
+		divisionResult.setIncompleteQuotient(incompleteQuotientArray);
+		divisionResult.setRemainder(remainderArray);
+		return divisionResult;
 	}
 
 	private Integer getDigit(int numeric, int position) {
