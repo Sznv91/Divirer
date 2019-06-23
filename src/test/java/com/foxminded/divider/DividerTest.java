@@ -2,6 +2,8 @@ package com.foxminded.divider;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,29 +18,53 @@ class DividerTest {
 
 	@Test
 	public void givenDividend78945Divider4_whenDivide_then19736() {
-		DivisionResult expected = new DivisionResult(new int[] { 7, 8, 9, 4, 5 }, 4);
-		expected.setResult(new int[] { 1, 9, 7, 3, 6 });
-		expected.setUpperResults(new int[] { 7, 38, 29, 14, 25, 1 });
-		expected.setDownerResults(new int[] { 4, 36, 28, 12, 24 });
+		DivisionResult expected = new DivisionResult(78945, 4);
+		expected.setResult(19736);
+		ArrayList<Integer> incompleteQuotient = new ArrayList<Integer>();
+		incompleteQuotient.add(7);
+		incompleteQuotient.add(38);
+		incompleteQuotient.add(29);
+		incompleteQuotient.add(14);
+		incompleteQuotient.add(25);
+		incompleteQuotient.add(1);
+		expected.setIncompleteQuotient(incompleteQuotient);
+		ArrayList<Integer> remainder = new ArrayList<Integer>();
+		remainder.add(4);
+		remainder.add(36);
+		remainder.add(28);
+		remainder.add(12);
+		remainder.add(24);
+		expected.setRemainder(remainder);
 		DivisionResult actual = dividerInstanse.getResult(78945, 4);
-		assertArrayEquals(expected.getResult(), actual.getResult());
-		assertArrayEquals(expected.getDivident(), actual.getDivident());
-		assertArrayEquals(expected.getDownerResults(), actual.getDownerResults());
-		assertArrayEquals(expected.getUpperResults(), actual.getUpperResults());
+		assertEquals(expected.getIncompleteQuotient(), actual.getIncompleteQuotient());
+		assertEquals(expected.getRemainder(), actual.getRemainder());
+		assertEquals(expected.getDivident(), actual.getDivident());
 		assertEquals(expected.getDivider(), actual.getDivider());
+		assertEquals(expected.getResult(), actual.getResult());
 	}
 
 	@Test
 	public void givenDividend362514Divider41_whenDivide_then8841() {
-		DivisionResult expected = new DivisionResult(new int[] { 362, 5, 1, 4 }, 41);
-		expected.setResult(new int[] { 8, 8, 4, 1 });
-		expected.setUpperResults(new int[] { 362, 345, 171, 74, 33 });
-		expected.setDownerResults(new int[] { 328, 328, 164, 41 });
+		DivisionResult expected = new DivisionResult(362514, 41);
+		expected.setResult(8841);
+		ArrayList<Integer> incompleteQuotient = new ArrayList<Integer>();
+		incompleteQuotient.add(362);
+		incompleteQuotient.add(345);
+		incompleteQuotient.add(171);
+		incompleteQuotient.add(74);
+		incompleteQuotient.add(33);
+		expected.setIncompleteQuotient(incompleteQuotient);
+		ArrayList<Integer> remainder = new ArrayList<Integer>();
+		remainder.add(328);
+		remainder.add(328);
+		remainder.add(164);
+		remainder.add(41);
+		expected.setRemainder(remainder);
 		DivisionResult actual = dividerInstanse.getResult(362514, 41);
-		assertArrayEquals(expected.getResult(), actual.getResult());
-		assertArrayEquals(expected.getDivident(), actual.getDivident());
-		assertArrayEquals(expected.getDownerResults(), actual.getDownerResults());
-		assertArrayEquals(expected.getUpperResults(), actual.getUpperResults());
+		assertEquals(expected.getResult(), actual.getResult());
+		assertEquals(expected.getDivident(), actual.getDivident());
+		assertEquals(expected.getIncompleteQuotient(), actual.getIncompleteQuotient());
+		assertEquals(expected.getRemainder(), actual.getRemainder());
 		assertEquals(expected.getDivider(), actual.getDivider());
 	}
 
