@@ -20,6 +20,8 @@ public class Divider {
 		ArrayList<Integer> upResultArray = new ArrayList<Integer>();
 		ArrayList<Integer> downResultArray = new ArrayList<Integer>();
 		int upResult = 0;
+		int downResult = 0;
+		int partOfAnswer = 0;
 		int answer = 0;
 		for (int i = 0; i < dividendMassive.length; i++) {
 			if (upResult / divider == 0) {
@@ -31,23 +33,22 @@ public class Divider {
 				}
 			} else {
 				upResultArray.add(upResult);
-				int partOfAnswer = upResult / divider;
-				int downResult = partOfAnswer * divider;
+				partOfAnswer = upResult / divider;
+				downResult = partOfAnswer * divider;
 				downResultArray.add(downResult);
 				answer = appendDigits(answer, partOfAnswer);
 				upResult = upResult - downResult;
 				upResult = appendDigits(upResult, dividendMassive[i]);
-				if (i == dividendMassive.length - 1) {
-					partOfAnswer = upResult / divider;
-					answer = appendDigits(answer, partOfAnswer);
-					downResult = partOfAnswer * divider;
-					upResultArray.add(upResult);
-					downResultArray.add(downResult);
-					upResultArray.add(upResult - downResult);
-				}
 			}
 		}
-		result.setDividendMassive(dividendMassive);
+		// last iteration//
+		partOfAnswer = upResult / divider;
+		answer = appendDigits(answer, partOfAnswer);
+		downResult = partOfAnswer * divider;
+		upResultArray.add(upResult);
+		downResultArray.add(downResult);
+		upResultArray.add(upResult - downResult);
+
 		result.setAnswer(answer);
 		result.setUpperResults(upResultArray);
 		result.setDownerResults(downResultArray);
@@ -74,7 +75,7 @@ public class Divider {
 		return result;
 	}
 
-	private Integer howManyDigit(int numeric) {
+	protected static Integer howManyDigit(int numeric) {
 		if (numeric == 0) {
 			return 1;
 		}

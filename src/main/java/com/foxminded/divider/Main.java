@@ -16,13 +16,6 @@ public class Main {
 		DivisionResult result = div.getResult(dividend, divider);
 		DivisionFormatter formatter = new DivisionFormatter();
 		System.out.println(formatter.format(result));
-		
-		
-//		Divider div = new Divider();
-//		DivisionResult divisionResult;
-//		divisionResult = div.getResult(78945, 4);
-//		DivisionFormatter format = new DivisionFormatter();
-//		System.out.println(format.format(divisionResult));
 	}
 
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class DivisionResult {
 	private int dividend;
-	private int[] dividendMassive;
 	private int divider;
 	private int answer;
 	private ArrayList<Integer> upperResults;
@@ -46,14 +45,6 @@ public class DivisionResult {
 
 	public void setAnswer(int answer) {
 		this.answer = answer;
-	}
-
-	public int[] getDividendMassive() {
-		return dividendMassive;
-	}
-
-	public void setDividendMassive(int[] dividendMassive) {
-		this.dividendMassive = dividendMassive;
 	}
 	
 }

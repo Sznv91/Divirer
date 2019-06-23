@@ -13,7 +13,7 @@ public class DivisionFormatter {
 		StringBuilder result = new StringBuilder();
 
 		formatFirstString(dividend, divider, result);
-		formatSecondString(howManyDigit(dividend), divider, result, ans, down);
+		formatSecondString(Divider.howManyDigit(dividend), divider, result, ans, down);
 		formatThirdString(dividend, result, ans, upper);
 		formatOtherString(result, upper, down);
 		return result.toString();
@@ -33,7 +33,7 @@ public class DivisionFormatter {
 			secondString.append(" ");
 		}
 		secondString.append("|");
-		for (int i = 0; i < howManyDigit(answer); i++) {
+		for (int i = 0; i < Divider.howManyDigit(answer); i++) {
 			secondString.append("-");
 		}
 		result.append(secondString.toString() + System.lineSeparator());
@@ -42,8 +42,8 @@ public class DivisionFormatter {
 	private void formatThirdString(int dividend, StringBuilder result, int answer, ArrayList<Integer> upper) {
 		StringBuilder thirdString = new StringBuilder();
 		thirdString.append(" ");
-		for (int i = 0; i < howManyDigit(dividend); i++) {
-			if (i < howManyDigit(upper.get(0))) {
+		for (int i = 0; i < Divider.howManyDigit(dividend); i++) {
+			if (i < Divider.howManyDigit(upper.get(0))) {
 				thirdString.append("-");
 			} else {
 				thirdString.append(" ");
@@ -55,7 +55,7 @@ public class DivisionFormatter {
 
 	private void formatOtherString(StringBuilder result, ArrayList<Integer> upString, ArrayList<Integer> downString) {
 		StringBuilder otherString;
-		int lastLenghSting = howManyDigit(upString.get(0)) + 1;
+		int lastLenghSting = Divider.howManyDigit(upString.get(0)) + 1;
 		for (int i = 1; i < downString.size(); i++) {
 			otherString = new StringBuilder();
 			otherString.append("_" + upString.get(i));
@@ -86,25 +86,13 @@ public class DivisionFormatter {
 
 	private String getBottomLine(int lastNumber, StringBuilder printedString) {
 		StringBuilder bottomLine = new StringBuilder();
-		while (howManyDigit(lastNumber) > bottomLine.length()) {
+		while (Divider.howManyDigit(lastNumber) > bottomLine.length()) {
 			bottomLine.append("-");
 		}
 		while (printedString.length() - 2 > bottomLine.length()) {
 			bottomLine.insert(0, " ");
 		}
 		return bottomLine.toString();
-	}
-
-	private int howManyDigit(int num) {
-		int counter = 0;
-		if (num == 0) {
-			return 1;
-		}
-		while (num > 0) {
-			num = num / 10;
-			counter++;
-		}
-		return counter;
 	}
 
 }
