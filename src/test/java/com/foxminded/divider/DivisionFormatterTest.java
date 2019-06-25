@@ -20,7 +20,7 @@ class DivisionFormatterTest {
 	public void givenDividend78945Divider4_whenDivisionFormatter_thenFormated() {
 		int dividend = 78945;
 		int divider = 4;
-		DivisionResult result = dividerInstance.getResult(dividend, divider);
+		DivisionResult result = dividerInstance.divide(dividend, divider);
 		String expected = divisionFormatterInstance.format(result);
 		StringBuilder actual = new StringBuilder();
 		actual.append("_78945|4" + System.lineSeparator());
@@ -46,7 +46,7 @@ class DivisionFormatterTest {
 	public void givenDividend36925814Divider41_whenDivisionFormatter_thenFormated() {
 		int dividend = 36925814;
 		int divider = 41;
-		DivisionResult result = dividerInstance.getResult(dividend, divider);
+		DivisionResult result = dividerInstance.divide(dividend, divider);
 		String expected = divisionFormatterInstance.format(result);
 		StringBuilder actual = new StringBuilder();
 		actual.append("_36925814|41" + System.lineSeparator());

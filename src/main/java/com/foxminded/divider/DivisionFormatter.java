@@ -1,6 +1,7 @@
 package com.foxminded.divider;
 
-import java.util.ArrayList;
+import java.util.List;
+
 import static com.foxminded.divider.Divider.howManyDigit;;
 
 public class DivisionFormatter {
@@ -9,25 +10,22 @@ public class DivisionFormatter {
 		int divider = divisionResult.getDivider();
 		int dividend = divisionResult.getDivident();
 		int resultDivider = divisionResult.getResult();
-		ArrayList<Integer> incompleteQuotient = divisionResult.getIncompleteQuotient();
-		ArrayList<Integer> remainder = divisionResult.getRemainder();
-		StringBuilder resultFormat = new StringBuilder();
+		List<Integer> incompleteQuotient = divisionResult.getIncompleteQuotient();
+		List<Integer> remainder = divisionResult.getRemainder();
+		StringBuilder result = new StringBuilder();
 
-		formatFirstString(dividend, divider, resultFormat);
-		formatSecondString(dividend, divider, resultFormat, resultDivider, remainder);
-		formatThirdString(dividend, resultFormat, resultDivider, incompleteQuotient);
-		formatOtherString(resultFormat, incompleteQuotient, remainder);
-		return resultFormat.toString();
+		formatHeader(dividend, divider, result, resultDivider, remainder);
+		formatThirdString(dividend, result, resultDivider, incompleteQuotient);
+		formatOtherString(result, incompleteQuotient, remainder);
+		return result.toString();
 	}
 
-	private void formatFirstString(int dividend, int divider, StringBuilder result) {
+	private void formatHeader(int dividend, int divider, StringBuilder result, int answer,
+			List<Integer> remainder) {
 		StringBuilder firstString = new StringBuilder("_" + dividend);
 		firstString.append("|" + divider);
 		result.append(firstString.toString() + System.lineSeparator());
-	}
-
-	private void formatSecondString(int dividend, int divider, StringBuilder result, int answer,
-			ArrayList<Integer> remainder) {
+		
 		StringBuilder secondString = new StringBuilder();
 		secondString.append(" " + remainder.get(0));
 		while (secondString.length() < howManyDigit(dividend) + 1) {
@@ -41,7 +39,7 @@ public class DivisionFormatter {
 	}
 
 	private void formatThirdString(int dividend, StringBuilder result, int answer,
-			ArrayList<Integer> incompleteQuotient) {
+			List<Integer> incompleteQuotient) {
 		StringBuilder thirdString = new StringBuilder();
 		thirdString.append(" ");
 		for (int i = 0; i < howManyDigit(dividend); i++) {
@@ -55,7 +53,7 @@ public class DivisionFormatter {
 		result.append(thirdString.toString() + System.lineSeparator());
 	}
 
-	private void formatOtherString(StringBuilder result, ArrayList<Integer> incompleteQuotient, ArrayList<Integer> remainder) {
+	private void formatOtherString(StringBuilder result, List<Integer> incompleteQuotient, List<Integer> remainder) {
 		StringBuilder otherString;
 		int lengthLastString = howManyDigit(incompleteQuotient.get(0)) + 1;
 		for (int i = 1; i < remainder.size(); i++) {

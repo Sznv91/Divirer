@@ -1,31 +1,25 @@
 package com.foxminded.divider;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Divider {
 
-	public DivisionResult getResult(int dividend, int divider) {
-		DivisionResult result = new DivisionResult(dividend, divider);
-		divide(result);
-		return result;
-	}
-
-	private DivisionResult divide(DivisionResult divisionResult) {
-		int dividend = divisionResult.getDivident();
-		int divider = divisionResult.getDivider();
-		int[] dividendMassive = new int[howManyDigit(dividend)];
-		for (int i = 0; i < dividendMassive.length; i++) {
-			dividendMassive[i] = getDigit(dividend, i + 1);
+	public DivisionResult divide(int dividend, int divider) {
+		DivisionResult divisionResult = new DivisionResult(dividend, divider);
+		int[] dividendDigits = new int[howManyDigit(dividend)];
+		for (int i = 0; i < dividendDigits.length; i++) {
+			dividendDigits[i] = getDigit(dividend, i + 1);
 		}
-		ArrayList<Integer> incompleteQuotientArray = new ArrayList<Integer>();
-		ArrayList<Integer> remainderArray = new ArrayList<Integer>();
+		List<Integer> incompleteQuotientArray = new ArrayList<Integer>();
+		List<Integer> remainderArray = new ArrayList<Integer>();
 		int currentIncompleteQuotient = 0;
 		int currentRemainder = 0;
 		int partOfResult = 0;
 		int result = 0;
-		for (int i = 0; i < dividendMassive.length; i++) {
+		for (int i = 0; i < dividendDigits.length; i++) {
 			if (currentIncompleteQuotient / divider == 0) {
-				currentIncompleteQuotient = appendDigits(currentIncompleteQuotient, dividendMassive[i]);
+				currentIncompleteQuotient = appendDigits(currentIncompleteQuotient, dividendDigits[i]);
 				if (result != 0) {
 					result = appendDigits(result, 0);
 					incompleteQuotientArray.add(0);
@@ -38,10 +32,9 @@ public class Divider {
 				remainderArray.add(currentRemainder);
 				result = appendDigits(result, partOfResult);
 				currentIncompleteQuotient = currentIncompleteQuotient - currentRemainder;
-				currentIncompleteQuotient = appendDigits(currentIncompleteQuotient, dividendMassive[i]);
+				currentIncompleteQuotient = appendDigits(currentIncompleteQuotient, dividendDigits[i]);
 			}
 		}
-		// last iteration//
 		partOfResult = currentIncompleteQuotient / divider;
 		result = appendDigits(result, partOfResult);
 		currentRemainder = partOfResult * divider;

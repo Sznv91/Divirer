@@ -13,7 +13,7 @@ public class Main {
 		int divider = scanner.nextInt();
 		scanner.close();
 		Divider dividerInstance = new Divider();
-		DivisionResult result = dividerInstance.getResult(dividend, divider);
+		DivisionResult result = dividerInstance.divide(dividend, divider);
 		DivisionFormatter formatter = new DivisionFormatter();
 		System.out.println(formatter.format(result));
 	}

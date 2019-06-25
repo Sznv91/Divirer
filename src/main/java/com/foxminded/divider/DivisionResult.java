@@ -1,13 +1,13 @@
 package com.foxminded.divider;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class DivisionResult {
 	private int dividend;
 	private int divider;
 	private int result;
-	private ArrayList<Integer> incompleteQuotient;
-	private ArrayList<Integer> remainder;
+	private List<Integer> incompleteQuotient;
+	private List<Integer> remainder;
 
 	public DivisionResult(int divident, int divider) {
 		super();
@@ -23,19 +23,19 @@ public class DivisionResult {
 		return divider;
 	}
 
-	public ArrayList<Integer> getIncompleteQuotient() {
+	public List<Integer> getIncompleteQuotient() {
 		return incompleteQuotient;
 	}
 
-	public void setIncompleteQuotient(ArrayList<Integer> incompleteQuotient) {
+	public void setIncompleteQuotient(List<Integer> incompleteQuotient) {
 		this.incompleteQuotient = incompleteQuotient;
 	}
 
-	public ArrayList<Integer> getRemainder() {
+	public List<Integer> getRemainder() {
 		return remainder;
 	}
 
-	public void setRemainder(ArrayList<Integer> remainder) {
+	public void setRemainder(List<Integer> remainder) {
 		this.remainder = remainder;
 	}
 

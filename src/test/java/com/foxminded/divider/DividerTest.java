@@ -3,6 +3,7 @@ package com.foxminded.divider;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ class DividerTest {
 	public void givenDividend78945Divider4_whenDivide_then19736() {
 		DivisionResult expected = new DivisionResult(78945, 4);
 		expected.setResult(19736);
-		ArrayList<Integer> incompleteQuotient = new ArrayList<Integer>();
+		List<Integer> incompleteQuotient = new ArrayList<Integer>();
 		incompleteQuotient.add(7);
 		incompleteQuotient.add(38);
 		incompleteQuotient.add(29);
@@ -28,14 +29,14 @@ class DividerTest {
 		incompleteQuotient.add(25);
 		incompleteQuotient.add(1);
 		expected.setIncompleteQuotient(incompleteQuotient);
-		ArrayList<Integer> remainder = new ArrayList<Integer>();
+		List<Integer> remainder = new ArrayList<Integer>();
 		remainder.add(4);
 		remainder.add(36);
 		remainder.add(28);
 		remainder.add(12);
 		remainder.add(24);
 		expected.setRemainder(remainder);
-		DivisionResult actual = dividerInstanse.getResult(78945, 4);
+		DivisionResult actual = dividerInstanse.divide(78945, 4);
 		assertEquals(expected.getIncompleteQuotient(), actual.getIncompleteQuotient());
 		assertEquals(expected.getRemainder(), actual.getRemainder());
 		assertEquals(expected.getDivident(), actual.getDivident());
@@ -47,20 +48,20 @@ class DividerTest {
 	public void givenDividend362514Divider41_whenDivide_then8841() {
 		DivisionResult expected = new DivisionResult(362514, 41);
 		expected.setResult(8841);
-		ArrayList<Integer> incompleteQuotient = new ArrayList<Integer>();
+		List<Integer> incompleteQuotient = new ArrayList<Integer>();
 		incompleteQuotient.add(362);
 		incompleteQuotient.add(345);
 		incompleteQuotient.add(171);
 		incompleteQuotient.add(74);
 		incompleteQuotient.add(33);
 		expected.setIncompleteQuotient(incompleteQuotient);
-		ArrayList<Integer> remainder = new ArrayList<Integer>();
+		List<Integer> remainder = new ArrayList<Integer>();
 		remainder.add(328);
 		remainder.add(328);
 		remainder.add(164);
 		remainder.add(41);
 		expected.setRemainder(remainder);
-		DivisionResult actual = dividerInstanse.getResult(362514, 41);
+		DivisionResult actual = dividerInstanse.divide(362514, 41);
 		assertEquals(expected.getResult(), actual.getResult());
 		assertEquals(expected.getDivident(), actual.getDivident());
 		assertEquals(expected.getIncompleteQuotient(), actual.getIncompleteQuotient());
