@@ -6,8 +6,7 @@ public class DivisionResult {
 	private int dividend;
 	private int divider;
 	private int result;
-	private List<Integer> incompleteQuotient;
-	private List<Integer> remainder;
+	private InnerCalcResult innerCalcResult = new InnerCalcResult();
 
 	public DivisionResult(int divident, int divider) {
 		super();
@@ -24,19 +23,19 @@ public class DivisionResult {
 	}
 
 	public List<Integer> getIncompleteQuotient() {
-		return incompleteQuotient;
+		return innerCalcResult.getIncompleteQuotient();
 	}
 
 	public void setIncompleteQuotient(List<Integer> incompleteQuotient) {
-		this.incompleteQuotient = incompleteQuotient;
+		this.innerCalcResult.setIncompleteQuotient(incompleteQuotient);
 	}
 
 	public List<Integer> getRemainder() {
-		return remainder;
+		return innerCalcResult.getRemainder();
 	}
 
 	public void setRemainder(List<Integer> remainder) {
-		this.remainder = remainder;
+		this.innerCalcResult.setRemainder(remainder);
 	}
 
 	public int getResult() {
