@@ -15,15 +15,15 @@ public class DivisionFormatter {
 	}
 
 	private void formatHeader(StringBuilder result, DivisionResult divisionResult) {
-		int dividend = divisionResult.getDivident(); 
-		int divider = divisionResult.getDivider(); 
+		int dividend = divisionResult.getDivident();
+		int divider = divisionResult.getDivider();
 		int divideResult = divisionResult.getResult();
 		List<Integer> remainder = divisionResult.getRemainder();
 		List<Integer> incompleteQuotient = divisionResult.getIncompleteQuotient();
 		StringBuilder firstString = new StringBuilder("_" + dividend);
 		firstString.append("|" + divider);
 		result.append(firstString.toString() + System.lineSeparator());
-		
+
 		StringBuilder secondString = new StringBuilder();
 		secondString.append(" " + remainder.get(0));
 		while (secondString.length() < howManyDigit(dividend) + 1) {
@@ -73,13 +73,13 @@ public class DivisionFormatter {
 			result.append(otherString.toString() + System.lineSeparator());
 		}
 	}
-	
-	private void formatRemainder (StringBuilder result, DivisionResult divisionResult) {
+
+	private void formatRemainder(StringBuilder result, DivisionResult divisionResult) {
 		List<Integer> incompleteQuotient = divisionResult.getIncompleteQuotient();
 		int dividend = divisionResult.getDivident();
 		StringBuilder lastString = new StringBuilder();
 		lastString.append(incompleteQuotient.get(incompleteQuotient.size() - 1));
-		while (lastString.length() < howManyDigit(dividend)+1) {
+		while (lastString.length() < howManyDigit(dividend) + 1) {
 			lastString.insert(0, " ");
 		}
 		result.append(lastString);

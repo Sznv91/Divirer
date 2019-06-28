@@ -3,10 +3,11 @@ package com.foxminded.divider;
 import java.util.List;
 
 public class DivisionResult {
+	
 	private int dividend;
 	private int divider;
 	private int result;
-	private InnerCalcResult innerCalcResult = new InnerCalcResult();
+	private IncompleteQuotientAndRemaider innerCalcResult = new IncompleteQuotientAndRemaider();
 
 	public DivisionResult(int divident, int divider) {
 		super();
@@ -45,5 +46,5 @@ public class DivisionResult {
 	public void setResult(int result) {
 		this.result = result;
 	}
-	
+
 }

@@ -21,7 +21,7 @@ class DividerTest {
 	public void givenDividend78945Divider4_whenDivide_then19736() {
 		DivisionResult expected = new DivisionResult(78945, 4);
 		expected.setResult(19736);
-		List<Integer> incompleteQuotient = new ArrayList<Integer>();
+		List<Integer> incompleteQuotient = new ArrayList<>();
 		incompleteQuotient.add(7);
 		incompleteQuotient.add(38);
 		incompleteQuotient.add(29);
@@ -29,7 +29,7 @@ class DividerTest {
 		incompleteQuotient.add(25);
 		incompleteQuotient.add(1);
 		expected.setIncompleteQuotient(incompleteQuotient);
-		List<Integer> remainder = new ArrayList<Integer>();
+		List<Integer> remainder = new ArrayList<>();
 		remainder.add(4);
 		remainder.add(36);
 		remainder.add(28);
@@ -48,14 +48,14 @@ class DividerTest {
 	public void givenDividend362514Divider41_whenDivide_then8841() {
 		DivisionResult expected = new DivisionResult(362514, 41);
 		expected.setResult(8841);
-		List<Integer> incompleteQuotient = new ArrayList<Integer>();
+		List<Integer> incompleteQuotient = new ArrayList<>();
 		incompleteQuotient.add(362);
 		incompleteQuotient.add(345);
 		incompleteQuotient.add(171);
 		incompleteQuotient.add(74);
 		incompleteQuotient.add(33);
 		expected.setIncompleteQuotient(incompleteQuotient);
-		List<Integer> remainder = new ArrayList<Integer>();
+		List<Integer> remainder = new ArrayList<>();
 		remainder.add(328);
 		remainder.add(328);
 		remainder.add(164);
