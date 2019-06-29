@@ -2,6 +2,7 @@ package com.foxminded.divider;
 
 import java.util.ArrayList;
 import java.util.List;
+import static com.foxminded.divider.NumberUtils.*;
 
 public class Divider {
 

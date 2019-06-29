@@ -2,7 +2,7 @@ package com.foxminded.divider;
 
 public class NumberUtils {
 	
-	protected Integer getDigit(int numeric, int position) {
+	protected static Integer getDigit(int numeric, int position) {
 		int counter = 1;
 		int multipler = 1;
 		int result = 0;
@@ -34,7 +34,7 @@ public class NumberUtils {
 		return result;
 	}
 
-	protected Integer appendDigits(int appended, int add) {
+	protected static Integer appendDigits(int appended, int add) {
 		if (appended == 0) {
 			return add;
 		}

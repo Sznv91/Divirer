@@ -2,7 +2,7 @@ package com.foxminded.divider;
 
 import java.util.List;
 
-import static com.foxminded.divider.Divider.howManyDigit;;
+import static com.foxminded.divider.NumberUtils.howManyDigit;
 
 public class DivisionFormatter {
 
@@ -20,9 +20,7 @@ public class DivisionFormatter {
 		int divideResult = divisionResult.getResult();
 		List<Integer> remainder = divisionResult.getRemainder();
 		List<Integer> incompleteQuotient = divisionResult.getIncompleteQuotient();
-		StringBuilder firstString = new StringBuilder("_" + dividend);
-		firstString.append("|" + divider);
-		result.append(firstString.toString() + System.lineSeparator());
+		result.append("_" + dividend + "|" + divider + System.lineSeparator());
 
 		StringBuilder secondString = new StringBuilder();
 		secondString.append(" " + remainder.get(0));
