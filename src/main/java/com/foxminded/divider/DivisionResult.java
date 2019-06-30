@@ -9,9 +9,9 @@ public class DivisionResult {
 	private int result;
 	private IncompleteQuotientAndRemaider innerCalcResult = new IncompleteQuotientAndRemaider();
 
-	public DivisionResult(int divident, int divider) {
+	public DivisionResult(int dividend, int divider) {
 		super();
-		this.dividend = divident;
+		this.dividend = dividend;
 		this.divider = divider;
 	}
 

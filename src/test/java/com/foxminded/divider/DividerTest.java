@@ -36,7 +36,9 @@ class DividerTest {
 		remainder.add(12);
 		remainder.add(24);
 		expected.setRemainder(remainder);
+		
 		DivisionResult actual = dividerInstanse.divide(78945, 4);
+		
 		assertEquals(expected.getIncompleteQuotient(), actual.getIncompleteQuotient());
 		assertEquals(expected.getRemainder(), actual.getRemainder());
 		assertEquals(expected.getDivident(), actual.getDivident());
@@ -61,7 +63,9 @@ class DividerTest {
 		remainder.add(164);
 		remainder.add(41);
 		expected.setRemainder(remainder);
+		
 		DivisionResult actual = dividerInstanse.divide(362514, 41);
+		
 		assertEquals(expected.getResult(), actual.getResult());
 		assertEquals(expected.getDivident(), actual.getDivident());
 		assertEquals(expected.getIncompleteQuotient(), actual.getIncompleteQuotient());
