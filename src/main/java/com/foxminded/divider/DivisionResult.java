@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DivisionResult {
-	
+
 	private int dividend;
 	private int divider;
 	private int result;

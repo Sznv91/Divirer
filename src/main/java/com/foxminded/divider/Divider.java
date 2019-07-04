@@ -16,7 +16,7 @@ public class Divider {
 				currentIncompleteQuotient = appendDigits(currentIncompleteQuotient, currentDividendDigit);
 				if (result != 0) {
 					result = appendDigits(result, 0);
-					divisionResult.setIncompleteQuotientAndRemainder(0, 0);					
+					divisionResult.setIncompleteQuotientAndRemainder(0, 0);
 				}
 			} else {
 				partOfResult = currentIncompleteQuotient / divider;
@@ -31,7 +31,7 @@ public class Divider {
 		result = appendDigits(result, partOfResult);
 		currentRemainder = partOfResult * divider;
 		divisionResult.setIncompleteQuotientAndRemainder(currentIncompleteQuotient, currentRemainder);
-		divisionResult.setIncompleteQuotientAndRemainder(currentIncompleteQuotient-currentRemainder, 0);
+		divisionResult.setIncompleteQuotientAndRemainder(currentIncompleteQuotient - currentRemainder, 0);
 		divisionResult.setResult(result);
 		return divisionResult;
 	}
