@@ -1,24 +1,22 @@
 package com.foxminded.divider;
 
-import java.util.List;
-
 public class IncompleteQuotientAndRemaider {
-	private List<Integer> incompleteQuotient;
-	private List<Integer> remainder;
+	private int incompleteQuotient;
+	private int remainder;
 
-	public List<Integer> getIncompleteQuotient() {
+	public int getIncompleteQuotient() {
 		return incompleteQuotient;
 	}
 
-	public void setIncompleteQuotient(List<Integer> incompleteQuotient) {
+	public void setIncompleteQuotient(int incompleteQuotient) {
 		this.incompleteQuotient = incompleteQuotient;
 	}
 
-	public List<Integer> getRemainder() {
+	public int getRemainder() {
 		return remainder;
 	}
 
-	public void setRemainder(List<Integer> remainder) {
+	public void setRemainder(int remainder) {
 		this.remainder = remainder;
 	}
 

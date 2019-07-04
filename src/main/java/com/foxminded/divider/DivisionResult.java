@@ -1,5 +1,6 @@
 package com.foxminded.divider;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DivisionResult {
@@ -7,9 +8,9 @@ public class DivisionResult {
 	private int dividend;
 	private int divider;
 	private int result;
-	//private IncompleteQuotientAndRemaider innerCalcResult = new IncompleteQuotientAndRemaider();
-	private List<Integer> incompleteQuotient;
-	private List<Integer> remainder;
+	private List<IncompleteQuotientAndRemaider> innerCalcResult = new ArrayList<>();
+//	private List<Integer> incompleteQuotient;
+//	private List<Integer> remainder;
 
 	public DivisionResult(int dividend, int divider) {
 		super();
@@ -25,25 +26,29 @@ public class DivisionResult {
 		return divider;
 	}
 
-	public List<Integer> getIncompleteQuotient() {
-		return incompleteQuotient;
+	public List<IncompleteQuotientAndRemaider> getIncompleteQuotient() {
+		return innerCalcResult;
 		//return innerCalcResult.getIncompleteQuotient();
 	}
 
-	public void setIncompleteQuotient(List<Integer> incompleteQuotient) {
-		this.incompleteQuotient = incompleteQuotient;
+	public void setIncompleteQuotientAndRemainder(int incompleteQuotient, int remainder) {
+		IncompleteQuotientAndRemaider toAdd = new IncompleteQuotientAndRemaider();
+		toAdd.setIncompleteQuotient(incompleteQuotient);
+		toAdd.setRemainder(remainder);
+		this.innerCalcResult.add(toAdd);
+		//this.incompleteQuotient = incompleteQuotient;
 		//this.innerCalcResult.setIncompleteQuotient(incompleteQuotient);
 	}
 
-	public List<Integer> getRemainder() {
-		return remainder;
-		//return innerCalcResult.getRemainder();
-	}
-
-	public void setRemainder(List<Integer> remainder) {
-		this.remainder = remainder;
-		//this.innerCalcResult.setRemainder(remainder);
-	}
+//	public List<Integer> getRemainder() {
+//		return remainder;
+//		//return innerCalcResult.getRemainder();
+//	}
+//
+//	public void setRemainder(List<Integer> remainder) {
+//		this.remainder = remainder;
+//		//this.innerCalcResult.setRemainder(remainder);
+//	}
 
 	public int getResult() {
 		return result;
@@ -66,19 +71,14 @@ public class DivisionResult {
 			return false;
 		if (divider != other.divider)
 			return false;
-		if (incompleteQuotient == null) {
-			if (other.incompleteQuotient != null)
+		if (innerCalcResult == null) {
+			if (other.innerCalcResult != null)
 				return false;
-		} else if (!incompleteQuotient.equals(other.incompleteQuotient))
-			return false;
-		if (remainder == null) {
-			if (other.remainder != null)
-				return false;
-		} else if (!remainder.equals(other.remainder))
+		} else if (!innerCalcResult.equals(other.innerCalcResult))
 			return false;
 		if (result != other.result)
 			return false;
 		return true;
 	}
-
+	
 }
