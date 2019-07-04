@@ -8,9 +8,7 @@ public class DivisionResult {
 	private int dividend;
 	private int divider;
 	private int result;
-	private List<IncompleteQuotientAndRemaider> innerCalcResult = new ArrayList<>();
-//	private List<Integer> incompleteQuotient;
-//	private List<Integer> remainder;
+	private List<IncompleteQuotientAndRemaider> incompleteQuotientAndRemaider = new ArrayList<>();
 
 	public DivisionResult(int dividend, int divider) {
 		super();
@@ -27,28 +25,15 @@ public class DivisionResult {
 	}
 
 	public List<IncompleteQuotientAndRemaider> getIncompleteQuotient() {
-		return innerCalcResult;
-		//return innerCalcResult.getIncompleteQuotient();
+		return incompleteQuotientAndRemaider;
 	}
 
 	public void setIncompleteQuotientAndRemainder(int incompleteQuotient, int remainder) {
 		IncompleteQuotientAndRemaider toAdd = new IncompleteQuotientAndRemaider();
 		toAdd.setIncompleteQuotient(incompleteQuotient);
 		toAdd.setRemainder(remainder);
-		this.innerCalcResult.add(toAdd);
-		//this.incompleteQuotient = incompleteQuotient;
-		//this.innerCalcResult.setIncompleteQuotient(incompleteQuotient);
+		this.incompleteQuotientAndRemaider.add(toAdd);
 	}
-
-//	public List<Integer> getRemainder() {
-//		return remainder;
-//		//return innerCalcResult.getRemainder();
-//	}
-//
-//	public void setRemainder(List<Integer> remainder) {
-//		this.remainder = remainder;
-//		//this.innerCalcResult.setRemainder(remainder);
-//	}
 
 	public int getResult() {
 		return result;
@@ -71,14 +56,14 @@ public class DivisionResult {
 			return false;
 		if (divider != other.divider)
 			return false;
-		if (innerCalcResult == null) {
-			if (other.innerCalcResult != null)
+		if (incompleteQuotientAndRemaider == null) {
+			if (other.incompleteQuotientAndRemaider != null)
 				return false;
-		} else if (!innerCalcResult.equals(other.innerCalcResult))
+		} else if (!incompleteQuotientAndRemaider.equals(other.incompleteQuotientAndRemaider))
 			return false;
 		if (result != other.result)
 			return false;
 		return true;
 	}
-	
+
 }

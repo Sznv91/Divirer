@@ -18,12 +18,11 @@ public class DivisionFormatter {
 		int dividend = divisionResult.getDivident();
 		int divider = divisionResult.getDivider();
 		int divideResult = divisionResult.getResult();
-		List<Integer> remainder = divisionResult.getRemainder();
-		List<Integer> incompleteQuotient = divisionResult.getIncompleteQuotient();
+		List<IncompleteQuotientAndRemaider> stepsDigit = divisionResult.getIncompleteQuotient();
 		result.append("_" + dividend + "|" + divider + System.lineSeparator());
 
 		StringBuilder secondString = new StringBuilder();
-		secondString.append(" " + remainder.get(0));
+		secondString.append(" " + stepsDigit.get(0).getRemainder());
 		while (secondString.length() < howManyDigit(dividend) + 1) {
 			secondString.append(" ");
 		}
@@ -35,7 +34,7 @@ public class DivisionFormatter {
 		StringBuilder thirdString = new StringBuilder();
 		thirdString.append(" ");
 		for (int i = 0; i < howManyDigit(dividend); i++) {
-			if (i < howManyDigit(incompleteQuotient.get(0))) {
+			if (i < howManyDigit(stepsDigit.get(0).getIncompleteQuotient())) {
 				thirdString.append("-");
 			} else {
 				thirdString.append(" ");
@@ -46,37 +45,36 @@ public class DivisionFormatter {
 	}
 
 	private void formatSteps(StringBuilder result, DivisionResult divisionResult) {
-		List<Integer> incompleteQuotient = divisionResult.getIncompleteQuotient();
-		List<Integer> remainder = divisionResult.getRemainder();
+		List<IncompleteQuotientAndRemaider> stepsDigit = divisionResult.getIncompleteQuotient();
 		StringBuilder otherString;
-		int lengthLastString = howManyDigit(incompleteQuotient.get(0)) + 1;
-		for (int i = 1; i < remainder.size(); i++) {
+		int lengthLastString = howManyDigit(stepsDigit.get(0).getIncompleteQuotient()) + 1;
+		for (int i = 1; i < stepsDigit.size()-1; i++) {
 			otherString = new StringBuilder();
-			otherString.append("_" + incompleteQuotient.get(i));
+			otherString.append("_" + stepsDigit.get(i).getIncompleteQuotient());
 			while (otherString.length() != lengthLastString + 1) {
 				otherString.insert(0, " ");
 			}
 			lengthLastString = otherString.length();
-			if (remainder.get(i).equals(0)) {
+			if (stepsDigit.get(i).getRemainder() == 0) {
 				continue;
 			}
 			result.append(otherString.toString() + System.lineSeparator());
 			otherString = new StringBuilder();
-			otherString.append(remainder.get(i));
+			otherString.append(stepsDigit.get(i).getRemainder());
 			while (otherString.length() != lengthLastString) {
 				otherString.insert(0, " ");
 			}
 			otherString.append(System.lineSeparator());
-			otherString.append(getLineSubtract(incompleteQuotient.get(i), otherString));
+			otherString.append(getLineSubtract(stepsDigit.get(i).getIncompleteQuotient(), otherString));
 			result.append(otherString.toString() + System.lineSeparator());
 		}
 	}
 
 	private void formatRemainder(StringBuilder result, DivisionResult divisionResult) {
-		List<Integer> incompleteQuotient = divisionResult.getIncompleteQuotient();
+		List<IncompleteQuotientAndRemaider> stepsDigit = divisionResult.getIncompleteQuotient();
 		int dividend = divisionResult.getDivident();
 		StringBuilder lastString = new StringBuilder();
-		lastString.append(incompleteQuotient.get(incompleteQuotient.size() - 1));
+		lastString.append(stepsDigit.get(stepsDigit.size()-1).getIncompleteQuotient());
 		while (lastString.length() < howManyDigit(dividend) + 1) {
 			lastString.insert(0, " ");
 		}
