@@ -2,7 +2,7 @@ package com.foxminded.divider;
 
 public class NumberUtils {
 	
-	protected static Integer getDigit(int numeric, int position) {
+	protected static int getDigit(int numeric, int position) {
 		int counter = 1;
 		int multipler = 1;
 		int result = 0;
@@ -22,7 +22,7 @@ public class NumberUtils {
 		return result;
 	}
 
-	protected static Integer howManyDigit(int number) {
+	protected static int howManyDigit(int number) {
 		if (number == 0) {
 			return 1;
 		}
@@ -34,23 +34,17 @@ public class NumberUtils {
 		return result;
 	}
 
-	protected static Integer appendDigits(int appended, int add) {
-		if (appended == 0) {
-			return add;
+	protected static int appendDigits(int original, int attached) {
+		if (original == 0) {
+			return attached;
 		}
-		int multipler = 1;
-		int result = 0;
-		int counter = howManyDigit(add);
-		while (counter != 0) {
-			result += getDigit(add, counter) * multipler;
-			counter--;
-			multipler = multipler * 10;
-		}
-		counter = howManyDigit(appended);
-		while (counter != 0) {
-			result += getDigit(appended, counter) * multipler;
-			counter--;
-			multipler = multipler * 10;
+		return original * 10 + attached;
+	}
+	
+	protected static int[] decomposeDividend(int dividend) {
+		int[] result = new int[howManyDigit(dividend)];
+		for (int i = 0; i < result.length; i++) {
+			result[i] = getDigit(dividend, i + 1);
 		}
 		return result;
 	}

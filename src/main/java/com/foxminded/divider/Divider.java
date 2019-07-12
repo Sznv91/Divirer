@@ -7,41 +7,33 @@ public class Divider {
 	public DivisionResult divide(int dividend, int divider) {
 		DivisionResult divisionResult = new DivisionResult(dividend, divider);
 		int[] dividendDigits = decomposeDividend(dividend);
-		int currentIncompleteQuotient = 0;
-		int currentRemainder = 0;
+		int incompleteQuotient = 0;
+		int remainder = 0;
 		int partOfResult = 0;
 		int result = 0;
-		for (int currentDividendDigit : dividendDigits) {
-			if (currentIncompleteQuotient / divider == 0) {
-				currentIncompleteQuotient = appendDigits(currentIncompleteQuotient, currentDividendDigit);
+		for (int digit : dividendDigits) {
+			if (incompleteQuotient / divider == 0) {
+				incompleteQuotient = appendDigits(incompleteQuotient, digit);
 				if (result != 0) {
 					result = appendDigits(result, 0);
 					divisionResult.setIncompleteQuotientAndRemainder(0, 0);
 				}
 			} else {
-				partOfResult = currentIncompleteQuotient / divider;
-				currentRemainder = partOfResult * divider;
-				divisionResult.setIncompleteQuotientAndRemainder(currentIncompleteQuotient, currentRemainder);
+				partOfResult = incompleteQuotient / divider;
+				remainder = partOfResult * divider;
+				divisionResult.setIncompleteQuotientAndRemainder(incompleteQuotient, remainder);
 				result = appendDigits(result, partOfResult);
-				currentIncompleteQuotient = currentIncompleteQuotient - currentRemainder;
-				currentIncompleteQuotient = appendDigits(currentIncompleteQuotient, currentDividendDigit);
+				incompleteQuotient = incompleteQuotient - remainder;
+				incompleteQuotient = appendDigits(incompleteQuotient, digit);
 			}
 		}
-		partOfResult = currentIncompleteQuotient / divider;
+		partOfResult = incompleteQuotient / divider;
 		result = appendDigits(result, partOfResult);
-		currentRemainder = partOfResult * divider;
-		divisionResult.setIncompleteQuotientAndRemainder(currentIncompleteQuotient, currentRemainder);
-		divisionResult.setIncompleteQuotientAndRemainder(currentIncompleteQuotient - currentRemainder, 0);
+		remainder = partOfResult * divider;
+		divisionResult.setIncompleteQuotientAndRemainder(incompleteQuotient, remainder);
+		divisionResult.setIncompleteQuotientAndRemainder(incompleteQuotient - remainder, 0);
 		divisionResult.setResult(result);
 		return divisionResult;
-	}
-
-	private int[] decomposeDividend(int dividend) {
-		int[] result = new int[howManyDigit(dividend)];
-		for (int i = 0; i < result.length; i++) {
-			result[i] = getDigit(dividend, i + 1);
-		}
-		return result;
 	}
 
 }

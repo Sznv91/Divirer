@@ -1,6 +1,6 @@
 package com.foxminded.divider;
 
-public class IncompleteQuotientAndRemaider {
+public class StepsSolution {
 	private int incompleteQuotient;
 	private int remainder;
 
@@ -28,7 +28,7 @@ public class IncompleteQuotientAndRemaider {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		IncompleteQuotientAndRemaider other = (IncompleteQuotientAndRemaider) obj;
+		StepsSolution other = (StepsSolution) obj;
 		if (incompleteQuotient != other.incompleteQuotient)
 			return false;
 		if (remainder != other.remainder)

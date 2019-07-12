@@ -1,17 +1,17 @@
 package com.foxminded.divider;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
-class DivisionFormatterTest {
+public class DivisionFormatterTest {
 
 	public DivisionFormatter divisionFormatterInstance;
 	public Divider dividerInstance;
 
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		divisionFormatterInstance = new DivisionFormatter();
 		dividerInstance = new Divider();
 	}

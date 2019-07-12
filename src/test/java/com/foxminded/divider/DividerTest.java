@@ -1,17 +1,17 @@
 package com.foxminded.divider;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
-class DividerTest {
+public class DividerTest {
 
-	public Divider dividerInstanse;
+	public Divider divider;
 
-	@BeforeEach
+	@Before
 	public void setUp() throws Exception {
-		dividerInstanse = new Divider();
+		divider = new Divider();
 	}
 
 	@Test
@@ -25,7 +25,7 @@ class DividerTest {
 		expected.setIncompleteQuotientAndRemainder(25, 24);
 		expected.setIncompleteQuotientAndRemainder(1, 0);
 		
-		DivisionResult actual = dividerInstanse.divide(78945, 4);
+		DivisionResult actual = divider.divide(78945, 4);
 		
 		assertEquals(expected, actual);
 	}
@@ -40,7 +40,7 @@ class DividerTest {
 		expected.setIncompleteQuotientAndRemainder(74, 41);
 		expected.setIncompleteQuotientAndRemainder(33, 0);
 		
-		DivisionResult actual = dividerInstanse.divide(362514, 41);
+		DivisionResult actual = divider.divide(362514, 41);
 		
 		assertEquals(expected, actual);
 	}
