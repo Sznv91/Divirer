@@ -29,10 +29,10 @@ public class DivisionResult {
 	}
 
 	public void setIncompleteQuotientAndRemainder(int incompleteQuotient, int remainder) {
-		DivisionStep step = new DivisionStep();
-		step.setIncompleteQuotient(incompleteQuotient);
-		step.setRemainder(remainder);
-		this.incompleteQuotientAndRemaider.add(step);
+		DivisionStep divisionStep = new DivisionStep();
+		divisionStep.setIncompleteQuotient(incompleteQuotient);
+		divisionStep.setRemainder(remainder);
+		this.incompleteQuotientAndRemaider.add(divisionStep);
 	}
 
 	public int getResult() {
