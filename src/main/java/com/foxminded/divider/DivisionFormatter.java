@@ -18,7 +18,7 @@ public class DivisionFormatter {
 		int dividend = divisionResult.getDivident();
 		int divider = divisionResult.getDivider();
 		int divideResult = divisionResult.getResult();
-		List<StepsSolution> stepsDigit = divisionResult.getStepsDigit();
+		List<DivisionStep> stepsDigit = divisionResult.getStepsDigit();
 		result.append("_" + dividend + "|" + divider + System.lineSeparator());
 
 		StringBuilder secondString = new StringBuilder();
@@ -45,7 +45,7 @@ public class DivisionFormatter {
 	}
 
 	private void formatSteps(StringBuilder result, DivisionResult divisionResult) {
-		List<StepsSolution> stepsDigit = divisionResult.getStepsDigit();
+		List<DivisionStep> stepsDigit = divisionResult.getStepsDigit();
 		StringBuilder otherString;
 		int lengthLastString = howManyDigit(stepsDigit.get(0).getIncompleteQuotient()) + 1;
 		for (int i = 1; i < stepsDigit.size() - 1; i++) {
@@ -71,7 +71,7 @@ public class DivisionFormatter {
 	}
 
 	private void formatRemainder(StringBuilder result, DivisionResult divisionResult) {
-		List<StepsSolution> stepsDigit = divisionResult.getStepsDigit();
+		List<DivisionStep> stepsDigit = divisionResult.getStepsDigit();
 		int dividend = divisionResult.getDivident();
 		StringBuilder lastString = new StringBuilder();
 		lastString.append(stepsDigit.get(stepsDigit.size() - 1).getIncompleteQuotient());

@@ -8,7 +8,7 @@ public class DivisionResult {
 	private int dividend;
 	private int divider;
 	private int result;
-	private List<StepsSolution> incompleteQuotientAndRemaider = new ArrayList<>();
+	private List<DivisionStep> incompleteQuotientAndRemaider = new ArrayList<>();
 
 	public DivisionResult(int dividend, int divider) {
 		super();
@@ -24,15 +24,15 @@ public class DivisionResult {
 		return divider;
 	}
 
-	public List<StepsSolution> getStepsDigit() {
+	public List<DivisionStep> getStepsDigit() {
 		return incompleteQuotientAndRemaider;
 	}
 
 	public void setIncompleteQuotientAndRemainder(int incompleteQuotient, int remainder) {
-		StepsSolution toAdd = new StepsSolution();
-		toAdd.setIncompleteQuotient(incompleteQuotient);
-		toAdd.setRemainder(remainder);
-		this.incompleteQuotientAndRemaider.add(toAdd);
+		DivisionStep step = new DivisionStep();
+		step.setIncompleteQuotient(incompleteQuotient);
+		step.setRemainder(remainder);
+		this.incompleteQuotientAndRemaider.add(step);
 	}
 
 	public int getResult() {

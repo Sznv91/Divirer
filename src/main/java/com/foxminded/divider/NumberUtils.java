@@ -1,7 +1,7 @@
 package com.foxminded.divider;
 
 public class NumberUtils {
-	
+
 	protected static int getDigit(int numeric, int position) {
 		int counter = 1;
 		int multipler = 1;
@@ -40,7 +40,7 @@ public class NumberUtils {
 		}
 		return original * 10 + attached;
 	}
-	
+
 	protected static int[] decomposeDividend(int dividend) {
 		int[] result = new int[howManyDigit(dividend)];
 		for (int i = 0; i < result.length; i++) {

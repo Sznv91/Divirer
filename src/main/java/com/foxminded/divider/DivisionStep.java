@@ -1,6 +1,7 @@
 package com.foxminded.divider;
 
-public class StepsSolution {
+public class DivisionStep {
+
 	private int incompleteQuotient;
 	private int remainder;
 
@@ -28,7 +29,7 @@ public class StepsSolution {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		StepsSolution other = (StepsSolution) obj;
+		DivisionStep other = (DivisionStep) obj;
 		if (incompleteQuotient != other.incompleteQuotient)
 			return false;
 		if (remainder != other.remainder)
