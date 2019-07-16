@@ -8,7 +8,7 @@ public class DivisionResult {
 	private int dividend;
 	private int divider;
 	private int result;
-	private List<DivisionStep> incompleteQuotientAndRemaider = new ArrayList<>();
+	private List<DivisionStep> divisionSteps = new ArrayList<>();
 
 	public DivisionResult(int dividend, int divider) {
 		super();
@@ -25,14 +25,14 @@ public class DivisionResult {
 	}
 
 	public List<DivisionStep> getStepsDigit() {
-		return incompleteQuotientAndRemaider;
+		return divisionSteps;
 	}
 
-	public void setIncompleteQuotientAndRemainder(int incompleteQuotient, int remainder) {
+	public void setDivisionStep(int incompleteQuotient, int remainder) {
 		DivisionStep divisionStep = new DivisionStep();
 		divisionStep.setIncompleteQuotient(incompleteQuotient);
 		divisionStep.setRemainder(remainder);
-		this.incompleteQuotientAndRemaider.add(divisionStep);
+		this.divisionSteps.add(divisionStep);
 	}
 
 	public int getResult() {
@@ -56,10 +56,10 @@ public class DivisionResult {
 			return false;
 		if (divider != other.divider)
 			return false;
-		if (incompleteQuotientAndRemaider == null) {
-			if (other.incompleteQuotientAndRemaider != null)
+		if (divisionSteps == null) {
+			if (other.divisionSteps != null)
 				return false;
-		} else if (!incompleteQuotientAndRemaider.equals(other.incompleteQuotientAndRemaider))
+		} else if (!divisionSteps.equals(other.divisionSteps))
 			return false;
 		if (result != other.result)
 			return false;

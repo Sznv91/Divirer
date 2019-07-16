@@ -16,12 +16,12 @@ public class Divider {
 				incompleteQuotient = appendDigits(incompleteQuotient, digit);
 				if (result != 0) {
 					result = appendDigits(result, 0);
-					divisionResult.setIncompleteQuotientAndRemainder(0, 0);
+					divisionResult.setDivisionStep(0, 0);
 				}
 			} else {
 				partOfResult = incompleteQuotient / divider;
 				remainder = partOfResult * divider;
-				divisionResult.setIncompleteQuotientAndRemainder(incompleteQuotient, remainder);
+				divisionResult.setDivisionStep(incompleteQuotient, remainder);
 				result = appendDigits(result, partOfResult);
 				incompleteQuotient = incompleteQuotient - remainder;
 				incompleteQuotient = appendDigits(incompleteQuotient, digit);
@@ -30,8 +30,8 @@ public class Divider {
 		partOfResult = incompleteQuotient / divider;
 		result = appendDigits(result, partOfResult);
 		remainder = partOfResult * divider;
-		divisionResult.setIncompleteQuotientAndRemainder(incompleteQuotient, remainder);
-		divisionResult.setIncompleteQuotientAndRemainder(incompleteQuotient - remainder, 0);
+		divisionResult.setDivisionStep(incompleteQuotient, remainder);
+		divisionResult.setDivisionStep(incompleteQuotient - remainder, 0);
 		divisionResult.setResult(result);
 		return divisionResult;
 	}
